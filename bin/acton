@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+RED='\e[1;31m'
+RESET='\e[0m'
+
+acton=$(bluetoothctl devices | grep ACTON | awk '{print $2}')
+[[ -z ${acton} ]] && echo -e "${RED}ACTON II not found${RESET}" && exit 1
+
+[[ -z $(bluetoothctl devices Paired | grep ACTON) ]] && bluetoothctl pair ${acton}
+
+if [[ -z $(bluetoothctl devices Connected | grep ACTON) ]]; then
+    bluetoothctl connect ${acton}
+    while
+        index=$(pacmd list-sinks | sed '/ACTON/q' | grep index: | tail -1 | awk '{print $2}')
+        [[ -z "$index" ]]
+    do true; done
+    pacmd set-default-sink $index &> /dev/null
+else
+    bluetoothctl disconnect ${acton}
+fi
