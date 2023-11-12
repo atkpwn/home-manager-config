@@ -15,7 +15,7 @@ in {
     historyFile     = ".config/bash_history";
     historyFileSize = 500000;
     historyIgnore = [
-      "exa"
+      "eza"
       "exit"
       "history"
       "ls"
@@ -27,7 +27,7 @@ in {
   zsh = rec {
     enable = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     enableAutosuggestions = true;
     defaultKeymap = "emacs";
     dirHashes = {
@@ -39,9 +39,9 @@ in {
     '';
     history = {
       extended       = true;
-      ignoreDups     = true;
+      ignoreAllDups  = true;
       ignorePatterns = [
-        "exa"
+        "eza"
         "exit"
         "history *"
         "ls"
@@ -54,6 +54,9 @@ in {
       share          = true;
       size           = 50000;
     };
+    initExtra = ''
+      source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
+    '';
     profileExtra = lib.optionalString isDarwin ''
       if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
         source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -62,10 +65,11 @@ in {
     '';
     shellAliases = {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
+      gdifft    = "GIT_EXTERNAL_DIFF=difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
       history   = "history 0";
-      tree      = "exa --tree";
+      tree      = "eza --tree";
     };
   };
 
@@ -74,7 +78,7 @@ in {
     # see https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
     settings = {
       env = {
-        "TERM" = "xterm-256color";
+        TERM = "xterm-256color";
       };
       cursor = {
         style.blinking = "On";
@@ -94,21 +98,38 @@ in {
         opacity     = 0.95;
         title       = "Terminal";
       };
-      font = {
+      font = (if isDarwin then {
+        size = 17;
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style  = "Regular";
+        };
+      } else {
         size = 7.5;
         normal = {
           family = "JetBrainsMono NF";
-          style = "Regular";
+          style  = "Regular";
         };
-      };
+      });
       scrolling.history = 100000;
-      shell.program     = "${pkgs.zsh}/bin/zsh";
-    };
+    } //
+    (if isDarwin then {
+      # https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#mac-os-4
+      key_bindings = [
+        { key = "F";     mods = "Command"; chars = "\\x1bf"; }
+        { key = "B";     mods = "Command"; chars = "\\x1bb"; }
+        { key = "Right"; mods = "Command"; chars = "\\x1bf"; }
+        { key = "Left";  mods = "Command"; chars = "\\x1bb"; }
+        { key = "Slash"; mods = "Control"; chars = "\\x1f"; }
+      ];
+    } else {
+      shell.program = "${pkgs.zsh}/bin/zsh";
+    });
   };
 
   bat.enable = true;
 
-  exa = {
+  eza = {
     enable = true;
     enableAliases = true;
     extraOptions = [
@@ -130,19 +151,39 @@ in {
       "--info=inline"
       "--border"
     ];
+    fileWidgetOptions = [
+      "--preview 'bat -n --color=always {}'"
+      "--preview-window 'hidden'"
+      "--bind 'ctrl-/:toggle-preview'"
+      "--header 'Press CTRL-/ to toggle preview'"
+    ];
   };
 
   git = {
     enable = true;
-    userName = "Attakorn Putwattana";
+    userName  = "Attakorn Putwattana";
     userEmail = "atkpwn@gmail.com";
     aliases = {
-      b    = "branch --color -v";
-      l    = "log --graph --pretty=format:'%Cred%h%Creset"
-             + " -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-             + " --abbrev-commit --date=relative";
-      su   = "submodule update --init --recursive";
-      undo = "reset --soft HEAD^";
+      b     = "branch --color -v";
+      c     = "checkout";
+      cb    = "checkout -b";
+      cm    = "checkout master";
+      difft = "difftool --extcmd=difft";
+      fixup = "commit --amend --no-edit";
+      l     = "log --graph --pretty=format:'%Cred%h%Creset"
+              + " -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+              + " --abbrev-commit --date=relative";
+      hist  = "log --follow -p --";
+      p     = "pull";
+      su    = "submodule update --init --recursive";
+      undo  = "reset --soft HEAD^";
+    };
+    delta = {
+      enable = true;
+      options = {
+        # see https://dandavison.github.io/delta/full---help-output.html
+        plus-style = "syntax bold '#1A3A1A'";
+      };
     };
     extraConfig = {
       init.defaultBranch = "main";
@@ -151,6 +192,7 @@ in {
         trustctime = false;
         whitespace = "trailing-space,space-before-tab";
       };
+      "url \"git@github.com:\"".insteadOf = "https://github.com/";
     };
   };
 
@@ -167,17 +209,23 @@ in {
 
   ssh = {
     enable = true;
+    extraConfig = ''
+      UseKeychain yes
+      AddkeysToAgent yes
+      IgnoreUnknown UseKeychain
+      ConnectTimeout 5
+    '';
     hashKnownHosts = true;
     matchBlocks = {
       bitbucket = {
-        hostname = "bitbucket.org";
+        hostname       = "bitbucket.org";
         identitiesOnly = true;
-        identityFile = "~/.ssh/bigfoot";
+        identityFile   = "~/.ssh/bigfoot";
       };
       github = {
-        hostname = "github.com";
+        hostname       = "github.com";
         identitiesOnly = true;
-        identityFile = "~/.ssh/bigfoot";
+        identityFile   = "~/.ssh/bigfoot";
       };
       keychain = {
         host = "*";
@@ -189,7 +237,7 @@ in {
       };
     };
     serverAliveInterval = 60;
-    userKnownHostsFile = "~/.ssh/known_hosts";
+    userKnownHostsFile  = "~/.ssh/known_hosts";
   };
 
   tmux = {
@@ -205,7 +253,7 @@ in {
     mouse            = true;
     prefix           = "C-z";
     shell            = "${pkgs.zsh}/bin/zsh";
-    terminal         = "screen-256color";
+    terminal         = "xterm-256color";
   };
 
   zoxide = {

@@ -4,9 +4,8 @@ let
 
   basic = [
     alacritty
-    emacs
-    emacs-all-the-icons-fonts
-    exa
+    myEmacsWithPackages
+    eza
     p7zip
     pass
     starship
@@ -32,6 +31,8 @@ let
     gimp
     gthumb
     inkscape
+    okular
+    poppler_utils # pdfunite
   ];
 
   internet = [
@@ -44,18 +45,33 @@ let
   ];
 
   programming = [
+    gdb
+    gnumake
     ccls
     cmake
     gcc
-    gdb
-    gnumake
+  ]
+  ++ [
+    gradle
+    jdk
+    jdt-language-server
+  ]
+  ++ [
+    rust-analyzer
+    rustfmt
+  ]
+  ++ [
+    go
+    gopls
+  ]
+  ++ [
+    texlive.combined.scheme-full
+    shfmt
     lean
+    nixfmt
     python311
     rnix-lsp
   ];
-
-  # TODO: latex
-  # texlive.combined.scheme-full
 
   misc = [
     bat
