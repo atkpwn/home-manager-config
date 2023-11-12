@@ -2,18 +2,19 @@ pkgs: epkgs:
 with epkgs;
 [
   ace-window
+  aggressive-indent
   auctex
   avy
   back-button
   # company
   # company-box
   consult
+  consult-dir
   consult-eglot
   dashboard
   diminish
   doom-themes
   doom-modeline
-  eglot-java
   embark
   embark-consult
   expand-region
@@ -36,6 +37,10 @@ with epkgs;
   rainbow-delimiters
   rg
   selected
+  sly
+  sly-asdf
+  sly-quicklisp
+  sly-repl-ansi-color
   treemacs
   treemacs-magit
   treemacs-nerd-icons
@@ -46,6 +51,7 @@ with epkgs;
   unfill
   use-package
   vertico
+  visual-fill-column
   which-key
   yasnippet
   zoom-window
