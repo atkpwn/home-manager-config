@@ -56,6 +56,10 @@ in {
     };
     initExtra = ''
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
+      complete -C aws_completer aws
+    '';
+    initExtraBeforeCompInit = ''
+      autoload bashcompinit && bashcompinit # for aws_completer
     '';
     profileExtra = lib.optionalString isDarwin ''
       if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
@@ -126,6 +130,8 @@ in {
       shell.program = "${pkgs.zsh}/bin/zsh";
     });
   };
+
+  awscli.enable = true;
 
   bat.enable = true;
 
