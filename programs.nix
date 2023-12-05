@@ -156,6 +156,7 @@ in {
       "--layout=reverse"
       "--info=inline"
       "--border"
+      "--color 'header:italic:underline,label:blue'"
     ];
     fileWidgetOptions = [
       "--preview 'bat -n --color=always {}'"
