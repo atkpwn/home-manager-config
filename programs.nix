@@ -254,7 +254,11 @@ in {
     clock24          = true;
     customPaneNavigationAndResize = true;
     escapeTime       = 0;
-    extraConfig      = (builtins.readFile ./config/tmux.conf);
+    extraConfig = (let conf = (builtins.readFile ./config/tmux.conf); in
+      if isDarwin then
+        (builtins.replaceStrings [ "xclip -selection clipboard" "xdg-open" ] [ "pbcopy" "open" ] conf)
+      else
+        conf);
     historyLimit     = 500000;
     keyMode          = "emacs";
     mouse            = true;
