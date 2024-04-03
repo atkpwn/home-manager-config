@@ -4,8 +4,8 @@ let
 
   basic = [
     alacritty
-    myEmacsWithPackages
     eza
+    gnupg
     p7zip
     pass
     starship
@@ -15,6 +15,16 @@ let
     zoxide
   ];
 
+  emacsWithTools = [
+    myEmacsWithPackages
+
+    # required by epackages.dirvish
+    ffmpegthumbnailer
+    mediainfo
+    poppler_utils
+    fd
+    imagemagick
+  ];
   fonts = [
     (nerdfonts.override {
       fonts = [
@@ -32,7 +42,6 @@ let
     gthumb
     inkscape
     okular
-    poppler_utils # pdfunite
   ];
 
   internet = [
@@ -92,6 +101,7 @@ let
 in
 
 basic
+++ emacsWithTools
 ++ fonts
 ++ graphics
 ++ internet

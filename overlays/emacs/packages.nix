@@ -5,35 +5,53 @@ with epkgs;
   aggressive-indent
   auctex
   avy
+  avy-zap
   back-button
-  # company
-  # company-box
+  blacken
+  cider
+  clj-refactor
+  clojure-ts-mode
+  cmake-font-lock
+  cmake-mode
+  corfu
   consult
   consult-dir
   consult-eglot
+  consult-project-extra
   dashboard
   diminish
-  doom-themes
+  dirvish
   doom-modeline
+  doom-themes
+  elfeed
   embark
   embark-consult
   expand-region
+  flycheck-clojure
   helpful
+  jq-format
+  json-mode
   magit
   magit-delta
   marginalia
+  markdown-mode
   minions
   multiple-cursors
   nerd-icons-completion
+  nerd-icons-corfu
   nerd-icons-dired
   no-littering
+  # numpydoc
   openwith
   orderless
   org-appear
+  org-modern
   org-roam
   org-superstar
+  pdf-tools
   perspective
   project-treemacs
+  pyvenv
   rainbow-delimiters
   rg
   selected
@@ -44,9 +62,7 @@ with epkgs;
   treemacs
   treemacs-magit
   treemacs-nerd-icons
-  # treemacs-perspective # didn't work
-  # tree-sitter
-  # tree-sitter-langs
+  treesit-grammars.with-all-grammars
   undo-tree
   unfill
   use-package
@@ -60,6 +76,7 @@ with epkgs;
 [
   cargo-mode
   eglot-java
+  go-mode
   kotlin-mode
   lean-mode
   nix-mode
