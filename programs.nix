@@ -57,6 +57,10 @@ in {
     initExtra = ''
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
       complete -C aws_completer aws
+
+      function m() {
+        emacsclient -ne "(man \"$1\")";
+      }
     '';
     initExtraBeforeCompInit = ''
       autoload bashcompinit && bashcompinit # for aws_completer
@@ -69,11 +73,23 @@ in {
     '';
     shellAliases = {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
+      e         = "emacsclient";
       gdifft    = "GIT_EXTERNAL_DIFF=difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
       history   = "history 0";
+      magit     = ''
+        (
+          PROJECT=$(git rev-parse --show-toplevel) && \
+          emacsclient -ne "(progn
+            (persp-switch \"$(basename $PROJECT)\")
+            (find-file \"$PROJECT\")
+            (magit-status))"
+        )
+      '';
       tree      = "eza --tree";
+    } // lib.optionalAttrs isDarwin {
+      emacs = ''open "$HOME/Applications/Home Manager Apps/Emacs.app"'';
     };
   };
 
