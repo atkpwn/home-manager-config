@@ -58,6 +58,9 @@ in {
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
       complete -C aws_completer aws
 
+      # allow fuzzy completion, see https://unix.stackexchange.com/a/647095
+      zstyle ':completion:*' matcher-list 'r:|?=**'
+
       function m() {
         emacsclient -ne "(man \"$1\")";
       }
