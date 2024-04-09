@@ -120,11 +120,11 @@ in {
     (if isDarwin then {
       # https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#mac-os-4
       key_bindings = [
-        { key = "F";     mods = "Command"; chars = "\\x1bf"; }
-        { key = "B";     mods = "Command"; chars = "\\x1bb"; }
-        { key = "Right"; mods = "Command"; chars = "\\x1bf"; }
-        { key = "Left";  mods = "Command"; chars = "\\x1bb"; }
-        { key = "Slash"; mods = "Control"; chars = "\\x1f"; }
+        { key = "F";     mods = "Command"; chars = "\\u001bf"; }
+        { key = "B";     mods = "Command"; chars = "\\u001bb"; }
+        { key = "Right"; mods = "Command"; chars = "\\u001bf"; }
+        { key = "Left";  mods = "Command"; chars = "\\u001bb"; }
+        { key = "Slash"; mods = "Control"; chars = "\\u007f"; }
       ];
     } else {
       shell.program = "${pkgs.zsh}/bin/zsh";
