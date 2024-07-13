@@ -46,6 +46,10 @@ with epkgs;
   orderless
   org-appear
   org-modern
+  (callPackage ./org-modern-indent.nix {
+    inherit (pkgs) fetchFromGitHub;
+    inherit (epkgs) trivialBuild compat;
+  })
   org-roam
   org-superstar
   pdf-tools
