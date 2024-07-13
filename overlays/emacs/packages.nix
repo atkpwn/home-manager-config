@@ -24,6 +24,7 @@ with epkgs;
   doom-modeline
   doom-themes
   elfeed
+  elfeed-webkit
   embark
   embark-consult
   expand-region

@@ -11,7 +11,7 @@ in {
       ];
     };
 
-    overlays = [ (import ./emacs/overlay.nix) ];
+    overlays = [ (import ./overlays/emacs/overlay.nix) ];
   };
 
   home = {
