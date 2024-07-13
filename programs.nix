@@ -1,7 +1,7 @@
 { pkgs, lib }:
 
 let
-  isDarwin   = pkgs.stdenv.targetPlatform.isDarwin;
+  isDarwin = pkgs.stdenv.targetPlatform.isDarwin;
 in {
   home-manager.enable = true;
 
@@ -28,7 +28,7 @@ in {
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     defaultKeymap = "emacs";
     dirHashes = {
       dl = "$HOME/Downloads";
@@ -48,11 +48,11 @@ in {
         "tmux"
         "z"
       ];
-      ignoreSpace    = true;
-      path           = "$HOME/${dotDir}/zsh_history";
-      save           = 500000;
-      share          = true;
-      size           = 50000;
+      ignoreSpace = true;
+      path        = "$HOME/${dotDir}/zsh_history";
+      save        = 500000;
+      share       = true;
+      size        = 50000;
     };
     initExtra = ''
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
@@ -185,6 +185,19 @@ in {
     ];
   };
 
+  gh = {
+    enable = true;
+    settings = {
+      editor = "emacsclient";
+      git_protocol = "ssh";
+      aliases = {
+        co = "pr checkout";
+        pv = "pr view";
+        prs = "pr list -A atkpwn";
+      };
+    };
+  };
+
   git = {
     enable = true;
     userName  = "Attakorn Putwattana";
@@ -196,8 +209,10 @@ in {
       cm    = "checkout master";
       difft = "difftool --extcmd=difft";
       fixup = "commit --amend --no-edit";
-      l     = "log --graph --pretty=format:'%Cred%h%Creset"
-              + " -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+      l     = "log"
+              + " --graph"
+              + " --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset"
+              + " %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
               + " --abbrev-commit --date=relative";
       hist  = "log --follow -p --";
       p     = "pull";
