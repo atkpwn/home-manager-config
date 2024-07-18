@@ -1,4 +1,4 @@
-{ pkgs, lib }:
+{ pkgs, config, lib, ... }:
 
 let
   isDarwin = pkgs.stdenv.targetPlatform.isDarwin;
@@ -100,38 +100,52 @@ in {
     enable = true;
     # see https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
     settings = {
-      env = {
-        TERM = "xterm-256color";
+      env = { TERM = "xterm-256color"; };
+      colors = with config.colorScheme.palette; {
+        primary = {
+          background = "#${base00}";
+          foreground = "#${base07}";
+        };
+        normal = {
+          black   = "#${base00}";
+          red     = "#${base08}";
+          green   = "#${base0B}";
+          yellow  = "#${base0A}";
+          blue    = "#${base0D}";
+          magenta = "#${base0E}";
+          cyan    = "#${base0C}";
+          white   = "#${base07}";
+        };
       };
       cursor = {
         style.blinking = "On";
         blink_interval = 500;
-        blink_timeout  = 0;
+        blink_timeout = 0;
       };
       window = {
         dimensions = {
           columns = 80;
-          lines   = 40;
+          lines = 40;
         };
         padding = {
           x = 2;
           y = 2;
         };
         decorations = (if isDarwin then "Buttonless" else "None");
-        opacity     = 0.95;
-        title       = "Terminal";
+        opacity = 0.95;
+        title = "Terminal";
       };
       font = (if isDarwin then {
         size = 17;
         normal = {
           family = "JetBrainsMono Nerd Font";
-          style  = "Regular";
+          style = "Regular";
         };
       } else {
-        size = 7.5;
+        size = 8;
         normal = {
           family = "JetBrainsMono NF";
-          style  = "Regular";
+          style = "Regular";
         };
       });
       scrolling.history = 100000;
