@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nix-colors, ... }:
 
 let
   linuxAttrs = lib.optionalAttrs pkgs.stdenv.targetPlatform.isLinux;
 in {
+  imports = [
+    nix-colors.homeManagerModules.default
+  ];
+
   nixpkgs = {
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -34,13 +38,15 @@ in {
   };
 
   programs = import ./programs.nix {
-    inherit pkgs;
-    inherit lib;
+    inherit pkgs config lib;
   };
 
   fonts.fontconfig.enable = true;
 
   xdg.enable = true;
+
+  # https://tinted-theming.github.io/base16-gallery/
+  colorScheme = nix-colors.colorSchemes.ia-dark;
 
   xfconf.settings = linuxAttrs {
     xfce4-keyboard-shortcuts = {
