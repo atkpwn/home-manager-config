@@ -11,9 +11,14 @@
     };
 
     nix-colors.url = "github:misterio77/nix-colors";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nix-colors, ... }:
+  outputs = { nixpkgs, home-manager, nix-colors, nix-index-database, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -25,6 +30,7 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
+          nix-index-database.hmModules.nix-index
         ];
 
         # Optionally use extraSpecialArgs

@@ -5,6 +5,11 @@ let
 in {
   home-manager.enable = true;
 
+  nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   bash = {
     enable = true;
     enableCompletion = true;
