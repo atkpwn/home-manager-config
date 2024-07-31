@@ -63,14 +63,27 @@ in {
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
       complete -C aws_completer aws
 
-      # allow fuzzy completion, see https://unix.stackexchange.com/a/647095
-      zstyle ':completion:*' matcher-list 'r:|?=**'
+      source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
+
+      # disable sort when completing `git checkout`
+      zstyle ':completion:*:git-checkout:*' sort false
+      # set list-colors to enable filename colorizing
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      # preview directory's content with eza when completing cd
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:z:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
+      # switch group using `,` and `.`
+      zstyle ':fzf-tab:*' switch-group ',' '.'
+
+      [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+      [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
       function m() {
         emacsclient -ne "(man \"$1\")";
       }
     '';
     initExtraBeforeCompInit = ''
+      fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
       autoload bashcompinit && bashcompinit # for aws_completer
     '';
     profileExtra = lib.optionalString isDarwin ''
