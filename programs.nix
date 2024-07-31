@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 
 let
-  isDarwin = pkgs.stdenv.targetPlatform.isDarwin;
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home-manager.enable = true;
 
@@ -17,7 +17,7 @@ in {
       "ignoredups"
       "ignorespace"
     ];
-    historyFile     = ".config/bash_history";
+    historyFile = ".config/bash_history";
     historyFileSize = 500000;
     historyIgnore = [
       "eza"
@@ -98,6 +98,7 @@ in {
       tree      = "eza --tree";
     } // lib.optionalAttrs isDarwin {
       emacs = ''open "$HOME/Applications/Home Manager Apps/Emacs.app"'';
+      google-chrome = ''open "/Applications/Google Chrome.app"'';
     };
   };
 
@@ -171,11 +172,19 @@ in {
 
   awscli.enable = true;
 
-  bat.enable = true;
+  broot = {
+    enable = true;
+    enableZshIntegration = true;
+    settings.verbs = [
+      { key = "ctrl-n"; execution = ":line_down"; }
+      { key = "ctrl-p"; execution = ":line_up"; }
+      { key = "ctrl-v"; execution = ":page_down"; }
+      { key = "alt-v"; execution = ":page_up"; }
+    ];
+  };
 
   eza = {
     enable = true;
-    enableAliases = true;
     extraOptions = [
       "--group-directories-first"
       "--header"
@@ -197,7 +206,7 @@ in {
       "--color 'header:italic:underline,label:blue'"
     ];
     fileWidgetOptions = [
-      "--preview 'bat -n --color=always {}'"
+      "--preview '${pkgs.bat}/bin/bat -n --color=always {}'"
       "--preview-window 'hidden'"
       "--bind 'ctrl-/:toggle-preview'"
       "--header 'Press CTRL-/ to toggle preview'"
