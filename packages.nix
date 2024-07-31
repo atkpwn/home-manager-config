@@ -13,6 +13,7 @@ let
     xclip
     zoxide
     zstd
+    zuki-themes
   ];
 
   emacsWithTools = [
