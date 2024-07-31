@@ -318,15 +318,42 @@ in {
     escapeTime       = 0;
     extraConfig = (let conf = (builtins.readFile ./config/tmux.conf); in
       if isDarwin then
-        (builtins.replaceStrings [ "xclip -selection clipboard" "xdg-open" ] [ "pbcopy" "open" ] conf)
+        builtins.replaceStrings [ "xclip -selection clipboard" "xdg-open" ] [ "pbcopy" "open" ] conf
       else
-        conf);
-    historyLimit     = 500000;
-    keyMode          = "emacs";
-    mouse            = true;
-    prefix           = "C-z";
-    shell            = "${pkgs.zsh}/bin/zsh";
-    terminal         = "xterm-256color";
+        conf
+    );
+    historyLimit = 500000;
+    keyMode      = "emacs";
+    mouse        = true;
+    plugins      = let
+      tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin rec {
+        pluginName = "tokyo-night";
+        version = "1.5.5";
+        rtpFilePath = "tokyo-night.tmux";
+        src = pkgs.fetchFromGitHub {
+          owner = "janoamaral";
+          repo = "tokyo-night-tmux";
+          rev = "refs/tags/v${version}";
+          hash = "sha256-ATaSfJSg/Hhsd4LwoUgHkAApcWZV3O3kLOn61r1Vbag=";
+        };
+        extraConfig = ''
+        set -g @tokyo-night-tmux_window_id_style none
+        set -g @tokyo-night-tmux_pane_id_style hide
+        set -g @tokyo-night-tmux_zoom_id_style hide # dsquare
+        set -g @tokyo-night-tmux_show_git 0
+      '';
+      };
+      catppuccin = {
+        plugin = catppuccin;
+        extraConfig = "set -g @catppuccin_flavour 'mocha'";
+      };
+    in [
+      pkgs.tmuxPlugins.resurrect
+      tokyo-night
+    ];
+    prefix   = "C-z";
+    shell    = "${pkgs.zsh}/bin/zsh";
+    terminal = "xterm-256color";
   };
 
   zoxide = {
