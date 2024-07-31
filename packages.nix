@@ -11,8 +11,8 @@ let
     starship
     tmux
     xclip
-    zstd
     zoxide
+    zstd
   ];
 
   emacsWithTools = [
@@ -36,6 +36,17 @@ let
     })
   ];
 
+  dev = [
+    comma
+    delta
+    difftastic
+    dive
+    docker
+    docker-compose
+    git
+    meld
+  ];
+
   graphics = [
     exiftool
     gimp
@@ -46,10 +57,17 @@ let
 
   internet = [
     brave
+    dogdns
     google-chrome
+    iftop
+    newman
+    qrencode
+    rsync
   ];
 
   entertainment = [
+    audacity
+    blanket
     spotify
   ];
 
@@ -61,12 +79,26 @@ let
     gcc
   ]
   ++ [
+    nil
+    nixfmt-classic
+  ]
+  ++ [
+    black # formatter
+    (python311.withPackages (ps: with ps; [
+      numpy
+      matplotlib
+      python-lsp-server
+    ]))
+  ]
+  ++ [
     gradle
     jdk
     jdt-language-server
   ]
   ++ [
+    cargo
     rust-analyzer
+    rustc
     rustfmt
   ]
   ++ [
@@ -74,25 +106,21 @@ let
     gopls
   ]
   ++ [
-    texlive.combined.scheme-full
-    shfmt
     lean
-    nixfmt
-    python311
-    rnix-lsp
+    nodePackages.bash-language-server
+    shfmt
+    texlive.combined.scheme-full
   ];
 
   misc = [
     bat
     bottom
-    difftastic
-    dive
+    btop
     du-dust
-    fd
-    fzf
+    file-roller # archive manager
+    gnome-disk-utility
     htop
     jq
-    pet        # Simple command-line snippet manager, written in Go
     pv
     ripgrep
     tokei      # Count your code, quickly
