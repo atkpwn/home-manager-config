@@ -84,10 +84,15 @@ let
     nixfmt-classic
   ]
   ++ [
-    black # formatter
-    (python311.withPackages (ps: with ps; [
-      numpy
+    ruff # linter & formatter
+
+    (python312.withPackages (ps: with ps; [
       matplotlib
+      numpy
+
+      mypy # type checker
+      pylsp-mypy
+      python-lsp-ruff
       python-lsp-server
     ]))
   ]
