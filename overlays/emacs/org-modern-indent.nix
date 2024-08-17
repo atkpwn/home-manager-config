@@ -1,12 +1,11 @@
 {
-  trivialBuild,
-  fetchFromGitHub,
-  compat
+  pkgs,
+  epkgs
 }:
-trivialBuild rec {
+epkgs.trivialBuild rec {
   pname = "org-modern-indent";
   version = "0.1.4";
-  src = fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "jdtsmith";
     repo = pname;
     rev = "refs/tags/v${version}";
@@ -14,7 +13,7 @@ trivialBuild rec {
   };
   # elisp dependencies
   propagatedUserEnvPkgs = [
-    compat
+    epkgs.compat
   ];
   buildInputs = propagatedUserEnvPkgs;
 }
