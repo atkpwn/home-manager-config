@@ -99,16 +99,24 @@ in {
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
       history   = "history 0";
-      magit     = ''
+      magit = ''
         (
           PROJECT=$(git rev-parse --show-toplevel) && \
           emacsclient -ne "(progn
-            (persp-switch \"$(basename $PROJECT)\")
+            (persp-switch \"''${PROJECT##*/}\")
             (find-file \"$PROJECT\")
             (magit-status))"
         )
       '';
-      tree      = "eza --tree";
+      dired = ''
+        (
+          DIR=''${''${PWD##*/}:-/}
+          emacsclient -ne "(progn
+            (persp-switch \"$DIR\")
+            (find-file \"$PWD\"))"
+        )
+      '';
+      tree = "eza --tree";
     } // lib.optionalAttrs isDarwin {
       emacs = ''open "$HOME/Applications/Home Manager Apps/Emacs.app"'';
       google-chrome = ''open "/Applications/Google Chrome.app"'';
