@@ -1,16 +1,19 @@
-{ pkgs }: with pkgs;
+{ pkgs }:
+with pkgs;
 
 let
+  isDarwin = stdenv.hostPlatform.isDarwin;
 
   basic = [
     alacritty
-    eza
     gnupg
+    libreoffice
     p7zip
     pass
     starship
     tmux
     xclip
+    xfce.thunar-archive-plugin
     zoxide
     zstd
     zuki-themes
@@ -26,6 +29,7 @@ let
     fd
     imagemagick
   ];
+
   fonts = [
     (nerdfonts.override {
       fonts = [
@@ -37,18 +41,30 @@ let
     })
   ];
 
-  dev = [
+  devTools = [
     comma
     delta
     difftastic
+
     dive
     docker
     docker-compose
+    dockerfile-language-server-nodejs
+    dockfmt
+
     git
+    jq
     meld
-  ];
+    newman
+  ] ++
+  (if isDarwin then [
+    colima
+    rectangle
+    unixtools.nettools
+  ] else []);
 
   graphics = [
+    darktable
     exiftool
     gimp
     gthumb
@@ -61,7 +77,6 @@ let
     dogdns
     google-chrome
     iftop
-    newman
     qrencode
     rsync
   ];
@@ -73,15 +88,17 @@ let
   ];
 
   programming = [
+    ccls
+    clang
+    cmake
+    cmake-language-server
     gdb
     gnumake
-    ccls
-    cmake
-    gcc
   ]
   ++ [
-    nil
-    nixfmt-classic
+    nixd
+    nixfmt-rfc-style
+    nixpkgs-fmt
   ]
   ++ [
     ruff # linter & formatter
@@ -89,6 +106,8 @@ let
     (python312.withPackages (ps: with ps; [
       matplotlib
       numpy
+      pandas
+      scipy
 
       mypy # type checker
       pylsp-mypy
@@ -109,7 +128,17 @@ let
   ]
   ++ [
     go
+    go-task
+    gofumpt
     gopls
+    gotest # `go test' with colors
+    gotools
+    ko
+  ]
+  ++ [
+    bun
+    nodePackages.typescript-language-server
+    nodejs_20
   ]
   ++ [
     lean
@@ -123,13 +152,22 @@ let
     bottom
     btop
     du-dust
-    file-roller # archive manager
+    entr # https://eradman.com/entrproject/
+    xsv
+    yq
+
+    fastfetch
     gnome-disk-utility
     htop
-    jq
-    pv
+    lsof
     ripgrep
-    tokei      # Count your code, quickly
+    tokei # Count your code, quickly
+
+    cmatrix
+    figlet
+    file-roller # archive manager
+    pstree
+    pv
   ];
 
 in
@@ -137,8 +175,9 @@ in
 basic
 ++ emacsWithTools
 ++ fonts
+++ devTools
+++ programming
 ++ graphics
 ++ internet
 ++ entertainment
-++ programming
 ++ misc
