@@ -61,7 +61,7 @@ in {
     };
     initExtra = ''
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
-      complete -C aws_completer aws
+      complete -C ${pkgs.awscli2}/bin/aws_completer aws
 
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
 
@@ -101,7 +101,7 @@ in {
     shellAliases = {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       e         = "emacsclient";
-      gdifft    = "GIT_EXTERNAL_DIFF=difft git diff";
+      gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
       history   = "history 0";
@@ -122,7 +122,7 @@ in {
             (find-file \"$PWD\"))"
         )
       '';
-      tree = "eza --tree";
+      tree = "${pkgs.eza}/bin/eza --tree";
     } // lib.optionalAttrs isDarwin {
       emacs = ''open "$HOME/Applications/Home Manager Apps/Emacs.app"'';
       google-chrome = ''open "/Applications/Google Chrome.app"'';
@@ -262,7 +262,7 @@ in {
       c     = "checkout";
       cb    = "checkout -b";
       cm    = "checkout master";
-      difft = "difftool --extcmd=difft";
+      difft = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
       fixup = "commit --amend --no-edit";
       l     = "log"
               + " --graph"
