@@ -65,15 +65,21 @@ in {
 
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
 
+      # from: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
       # disable sort when completing `git checkout`
       zstyle ':completion:*:git-checkout:*' sort false
+      # set descriptions format to enable group support
+      # NOTE: don't use escape sequences here, fzf-tab will ignore them
+      zstyle ':completion:*:descriptions' format '[%d]'
       # set list-colors to enable filename colorizing
       zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+      zstyle ':completion:*' menu no
       # preview directory's content with eza when completing cd
       zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
       zstyle ':fzf-tab:complete:z:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
-      # switch group using `,` and `.`
-      zstyle ':fzf-tab:*' switch-group ',' '.'
+      # switch group using `<` and `>`
+      zstyle ':fzf-tab:*' switch-group '<' '>'
 
       [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
       [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
