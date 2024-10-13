@@ -22,6 +22,11 @@ in {
     username = "attakorn";
     homeDirectory = "/home/attakorn";
     stateVersion = "22.11";
+    keyboard = {
+      layout = "us,th";
+      variant = "altgr-intl,";
+      options = "grp:win_space_toggle";
+    };
     packages = import ./packages.nix { inherit pkgs; };
     sessionPath = [
       (toString ./bin)
@@ -58,6 +63,7 @@ in {
     };
     xfce4-panel = {
       "plugins/plugin-2/grouping" = false;
+      "plugins/plugin-7/enable-keyboard-shortcuts" = true;
     };
     xfce4-keyboard-shortcuts = {
       "xfwm4/custom/<Super>Down"   = "tile_down_key";
@@ -67,6 +73,15 @@ in {
       "xfwm4/custom/<Super>Return" = "maximize_window_key";
       "xfwm4/custom/<Primary><Alt><Shift>Left"  = "move_window_prev_workspace_key";
       "xfwm4/custom/<Primary><Alt><Shift>Right" = "move_window_next_workspace_key";
+    };
+    keyboard-layout = {
+      "Default/XkbLayout"  = "us,th";
+      "Default/XkbVariant" = "altgr-intl,";
+      "Default/XkbDisable" = false;
+      "Default/XkbOptions/Group" = "grp:win_space_toggle";
+    };
+    pointers = {
+      "SynPS2_Synaptics_TouchPad/Properties/Device_Enabled" = 0;
     };
     xsettings = {
       "Net/ThemeName" = "Zukitre-dark";
