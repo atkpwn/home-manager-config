@@ -56,6 +56,9 @@ in {
     xfwm4 = {
       "general/workspace_count" = 2;
     };
+    xfce4-panel = {
+      "plugins/plugin-2/grouping" = false;
+    };
     xfce4-keyboard-shortcuts = {
       "xfwm4/custom/<Super>Down"   = "tile_down_key";
       "xfwm4/custom/<Super>Up"     = "tile_up_key";
