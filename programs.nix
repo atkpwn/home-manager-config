@@ -60,6 +60,8 @@ in {
       size        = 50000;
     };
     initExtra = ''
+      export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate alabaster_dark)"
+
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
       complete -C ${pkgs.awscli2}/bin/aws_completer aws
 
