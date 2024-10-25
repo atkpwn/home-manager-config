@@ -106,7 +106,6 @@ in {
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
-      history   = "history 0";
       magit = ''
         (
           PROJECT=$(git rev-parse --show-toplevel) && \
@@ -170,19 +169,18 @@ in {
         opacity = 0.95;
         title = "Terminal";
       };
-      font = (if isDarwin then {
-        size = 17;
-        normal = {
-          family = "JetBrainsMono Nerd Font";
-          style = "Regular";
+      font = let
+        jetbrainsMono = style: {
+          family = if isDarwin then "JetBrainsMono Nerd Font" else "JetBrainsMono NF";
+          inherit style;
         };
-      } else {
-        size = 8;
-        normal = {
-          family = "JetBrainsMono NF";
-          style = "Regular";
+        in {
+          size        = if isDarwin then 16.0 else 8.0;
+          normal      = jetbrainsMono "Regular";
+          bold        = jetbrainsMono "Bold";
+          italic      = jetbrainsMono "Italic";
+          bold_italic = jetbrainsMono "Bold Italic";
         };
-      });
       scrolling.history = 100000;
     } //
     (if isDarwin then {
@@ -198,8 +196,6 @@ in {
       shell.program = "${pkgs.zsh}/bin/zsh";
     });
   };
-
-  awscli.enable = true;
 
   broot = {
     enable = true;
