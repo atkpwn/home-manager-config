@@ -7,7 +7,7 @@ with epkgs;
   avy
   avy-zap
   back-button
-  blacken
+  blamer
   cider
   clj-refactor
   clojure-ts-mode
@@ -19,8 +19,12 @@ with epkgs;
   consult-eglot
   consult-project-extra
   dashboard
+  devdocs
+  diff-hl
+  diffview
   diminish
   dirvish
+  dockerfile-mode
   doom-modeline
   doom-themes
   elfeed
@@ -42,7 +46,6 @@ with epkgs;
   nerd-icons-corfu
   nerd-icons-dired
   no-littering
-  # numpydoc
   openwith
   orderless
   org-appear
@@ -52,6 +55,7 @@ with epkgs;
   org-superstar
   pdf-tools
   perspective
+  popper
   project-treemacs
   pyvenv
   rainbow-delimiters
