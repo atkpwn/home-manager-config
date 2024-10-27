@@ -18,7 +18,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nix-colors, nix-index-database, ... }:
+  outputs = { nixpkgs, home-manager, nix-index-database, ... } @ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -37,8 +37,8 @@
         # to pass through arguments to home.nix
         extraSpecialArgs = {
           useGlobalPkgs = true;
-          inherit nix-colors;
+          inherit inputs;
         };
       };
-    };
+  };
 }
