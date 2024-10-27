@@ -1,10 +1,10 @@
-{ config, pkgs, lib, nix-colors, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   linuxAttrs = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux;
 in {
   imports = [
-    nix-colors.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
   ];
 
   nixpkgs = {
@@ -55,7 +55,7 @@ in {
   };
 
   # https://tinted-theming.github.io/base16-gallery/
-  colorScheme = nix-colors.colorSchemes.ia-dark;
+  colorScheme = inputs.nix-colors.colorSchemes.railscasts;
 
   xfconf.settings = linuxAttrs import ./config/xfconf.nix;
 }
