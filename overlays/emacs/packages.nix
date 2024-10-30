@@ -10,9 +10,7 @@ with epkgs;
   blamer
   cider
   clj-refactor
-  clojure-ts-mode
   cmake-font-lock
-  cmake-mode
   corfu
   consult
   consult-dir
@@ -34,8 +32,8 @@ with epkgs;
   expand-region
   flycheck-clojure
   helpful
+  highlight-indentation
   jq-format
-  json-mode
   magit
   magit-delta
   marginalia
@@ -45,6 +43,7 @@ with epkgs;
   nerd-icons-completion
   nerd-icons-corfu
   nerd-icons-dired
+  nginx-mode
   no-littering
   openwith
   orderless
@@ -81,12 +80,10 @@ with epkgs;
 ++
 [
   cargo-mode
-  eglot-java
-  go-mode
+  clojure-ts-mode
   kotlin-mode
   lean-mode
   nix-mode
-  rust-mode
+  nix-ts-mode
   shfmt
-  typescript-mode
 ]

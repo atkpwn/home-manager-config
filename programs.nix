@@ -193,7 +193,7 @@ in {
         { key = "Slash"; mods = "Control"; chars = "\\u007f"; }
       ];
     } else {
-      shell.program = "${pkgs.zsh}/bin/zsh";
+      terminal.shell = "${pkgs.zsh}/bin/zsh";
     });
   };
 
@@ -213,10 +213,9 @@ in {
     extraOptions = [
       "--group-directories-first"
       "--header"
-      "--classify"
     ];
     git   = true;
-    icons = true;
+    icons = "auto";
   };
 
   fzf = {
