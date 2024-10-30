@@ -112,6 +112,7 @@ in {
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
+      k         = "kubectl";
       magit = ''
         (
           PROJECT=$(git rev-parse --show-toplevel) && \
