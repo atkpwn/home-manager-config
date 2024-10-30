@@ -18,6 +18,9 @@ in {
     overlays = [ (import ./overlays/emacs) ];
   };
 
+  # needed for nixd to be able to find correct packages
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
   home = {
     username = "attakorn";
     homeDirectory = "/home/attakorn";
