@@ -13,7 +13,6 @@ let
     starship
     tmux
     xclip
-    xfce.thunar-archive-plugin
     zoxide
     zstd
     zuki-themes
@@ -43,7 +42,6 @@ let
 
   devTools = [
     comma
-    delta
     difftastic
 
     dive
@@ -51,6 +49,7 @@ let
     docker-compose
     dockerfile-language-server-nodejs
     dockfmt
+    lazydocker
 
     git
     jq
