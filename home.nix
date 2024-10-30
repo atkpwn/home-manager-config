@@ -1,6 +1,7 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
+  inherit (pkgs) lib;
   linuxAttrs = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux;
 in {
   imports = [
