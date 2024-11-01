@@ -146,6 +146,7 @@ let
   ]
   ++ [
     bun
+    deno
     nodePackages.typescript-language-server
     nodejs_20
   ]
