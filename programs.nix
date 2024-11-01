@@ -98,6 +98,7 @@ in {
     '';
     initExtraBeforeCompInit = ''
       fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
+      fpath=(${pkgs.deno}/share/zsh/site-functions $fpath)
       autoload bashcompinit && bashcompinit # for aws_completer
     '';
     profileExtra = lib.optionalString isDarwin ''
