@@ -350,7 +350,7 @@ in {
     clock24          = true;
     customPaneNavigationAndResize = true;
     escapeTime       = 0;
-    extraConfig = (let conf = (builtins.readFile ./config/tmux.conf); in
+    extraConfig = (let conf = (builtins.readFile ./config/tmux/tmux.conf); in
       if isDarwin then
         builtins.replaceStrings [ "xclip -selection clipboard" "xdg-open" ] [ "pbcopy" "open" ] conf
       else
@@ -379,7 +379,7 @@ in {
       };
       rose-pine = {
         plugin = rose-pine;
-        extraConfig = builtins.readFile ./config/rose-pine.conf;
+        extraConfig = builtins.readFile ./config/tmux/rose-pine.conf;
       };
       catppuccin = {
         plugin = catppuccin;
