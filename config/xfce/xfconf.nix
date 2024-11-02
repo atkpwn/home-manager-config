@@ -1,4 +1,5 @@
 {
+  # see https://github.com/novoid/nixos-config/blob/main/homemanager/xfce.nix
   xfwm4 = {
     "general/workspace_count" = 2;
   };
