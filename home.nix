@@ -55,11 +55,12 @@ in {
   xdg = {
     enable = true;
     # stop beeping
-    configFile."autostart/beep.desktop".text = builtins.readFile ./config/beep.desktop;
+    configFile."autostart/beep.desktop".text = builtins.readFile ./config/xfce/beep.desktop;
   };
 
   # https://tinted-theming.github.io/base16-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.railscasts;
 
-  xfconf.settings = linuxAttrs import ./config/xfconf.nix;
+  xfconf.settings = linuxAttrs import ./config/xfce/xfconf.nix;
+
 }
