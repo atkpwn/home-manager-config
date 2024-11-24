@@ -43,6 +43,9 @@ let
   devTools = [
     comma
     difftastic
+    hyperfine
+    ripgrep
+    tokei # Count your code, quickly
 
     dive
     docker
@@ -154,7 +157,7 @@ let
     lean
     nodePackages.bash-language-server
     shfmt
-    texlive.combined.scheme-full
+    texliveFull
   ];
 
   misc = [
@@ -163,6 +166,7 @@ let
     btop
     du-dust
     entr # https://eradman.com/entrproject/
+    pv
     xsv
     yq
 
@@ -170,14 +174,13 @@ let
     gnome-disk-utility
     htop
     lsof
-    ripgrep
-    tokei # Count your code, quickly
+    pstree
 
     cmatrix
     figlet
     file-roller # archive manager
-    pstree
-    pv
+
+    isoimagewriter
   ];
 
 in
