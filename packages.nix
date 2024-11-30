@@ -40,6 +40,13 @@ let
     })
   ];
 
+  scripts = let
+    fs = pkgs.lib.fileset;
+    in
+    fs.fileFilter (f: f.hasExt "nix") ./scripts
+    |> fs.toList
+    |> map (s: pkgs.callPackage s { });
+
   devTools = [
     comma
     difftastic
@@ -188,6 +195,7 @@ in
 basic
 ++ emacsWithTools
 ++ fonts
+++ scripts
 ++ devTools
 ++ programming
 ++ graphics
