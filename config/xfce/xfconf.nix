@@ -8,6 +8,7 @@
     "plugins/plugin-7/enable-keyboard-shortcuts" = true;
   };
   xfce4-keyboard-shortcuts = {
+    "commands/custom/<Alt>space" = "rofi -show";
     "xfwm4/custom/<Super>Down"   = "tile_down_key";
     "xfwm4/custom/<Super>Up"     = "tile_up_key";
     "xfwm4/custom/<Super>Left"   = "tile_left_key";

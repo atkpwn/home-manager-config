@@ -29,15 +29,11 @@ let
     imagemagick
   ];
 
-  fonts = [
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "Inconsolata"
-        "JetBrainsMono"
-        "RobotoMono"
-      ];
-    })
+  fonts = with nerd-fonts; [
+    fira-code
+    inconsolata
+    jetbrains-mono
+    roboto-mono
   ];
 
   scripts = let
