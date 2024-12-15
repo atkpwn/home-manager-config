@@ -1,0 +1,73 @@
+/*-*- mode: css; -*-*/
+* {
+    /*
+      color codes from
+      https://github.com/tinted-theming/tinted-vim/blob/main/colors/base16-tomorrow-night.vim
+   */
+    bg:        #1d1f21;
+    bg-light:  #373b41;
+    fg-dark:   #b4b7b4;
+    fg:        #e0e0e0;
+
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+window {
+    width:  700px;
+    height: 40%;
+
+    border:        1px solid;
+    border-color:  @bg-light;
+    border-radius: 10px;
+}
+
+inputbar {
+    background-color: @bg;
+    padding:          15px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    padding:          0px 5px;
+}
+
+entry {
+    background-color: transparent;
+}
+
+element {
+    background-color: transparent;
+    border:           0px solid;
+    spacing:          5px;
+    padding:          5px;
+}
+
+element selected.normal {
+    background-color: @bg-light;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             25px;
+}
+
+element-text {
+    background-color: transparent;
+}
+
+button {
+    text-color: @bg-light;
+}
+
+button selected {
+    text-color: @fg-dark;
+}
+
+textbox {
+    background-color: transparent;
+    padding:          5px 10px;
+    text-color:       @fg-dark;
+    vertical-align:   0.5;
+}

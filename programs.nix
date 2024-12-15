@@ -1,7 +1,8 @@
 { pkgs, config, lib, ... }:
 
 let
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+  defaultFont = "JetBrainsMono Nerd Font";
 in {
   home-manager.enable = true;
 
@@ -179,7 +180,7 @@ in {
       };
       font = let
         jetbrainsMono = style: {
-          family = if isDarwin then "JetBrainsMono Nerd Font" else "JetBrainsMono NF";
+          family = defaultFont;
           inherit style;
         };
         in {
@@ -295,6 +296,33 @@ in {
       };
       "url \"git@github.com:\"".insteadOf = "https://github.com/";
     };
+  };
+
+  rofi = {
+    enable = isLinux;
+    cycle = true;
+    extraConfig = {
+      modi = "run,filebrowser,emoji";
+      font = defaultFont + " 14";
+      kb-cancel = "!Alt+space,Escape,Control+g";
+      display-combi = " ";
+      display-emoji = "󰱨 ";
+      display-filebrowser = " ";
+      display-run = " ";
+      display-window = " ";
+      display-workspace = "";
+      # drun-display-format = "{name}";
+      show-icons = true;
+
+      sidebar-mode = true;
+      window-format = "{c} · {t}";
+    };
+    location = "center";
+    plugins = [
+      pkgs.rofi-emoji
+    ];
+    terminal = "alacritty";
+    theme = ./config/rofi/tomorrow-night.rasi;
   };
 
   starship = {
