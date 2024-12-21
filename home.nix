@@ -6,6 +6,7 @@ let
 in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./modules/emacs
   ];
 
   nixpkgs = {
@@ -15,8 +16,6 @@ in {
         "spotify"
       ];
     };
-
-    overlays = [ (import ./overlays/emacs) ];
   };
 
   # needed for nixd to be able to find correct packages
@@ -35,9 +34,6 @@ in {
     sessionPath = [
       (toString ./bin)
     ];
-    sessionVariables = {
-      EDITOR = "emacsclient";
-    };
     file = linuxAttrs {
       "${config.xdg.configHome}/xfce4/helpers.rc".text = ''
         WebBrowser=brave
