@@ -18,17 +18,6 @@ let
     zuki-themes
   ];
 
-  emacsWithTools = [
-    myEmacsWithPackages
-
-    # required by epackages.dirvish
-    ffmpegthumbnailer
-    mediainfo
-    poppler_utils
-    fd
-    imagemagick
-  ];
-
   fonts = with nerd-fonts; [
     fira-code
     inconsolata
@@ -189,7 +178,6 @@ let
 in
 
 basic
-++ emacsWithTools
 ++ fonts
 ++ scripts
 ++ devTools
