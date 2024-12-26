@@ -2,10 +2,11 @@
 
 let
   inherit (pkgs) lib;
-  linuxAttrs = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux;
 in {
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./modules/xfce.nix
+    ./modules/rofi.nix
     ./modules/emacs
   ];
 
@@ -34,12 +35,6 @@ in {
     sessionPath = [
       (toString ./bin)
     ];
-    file = linuxAttrs {
-      "${config.xdg.configHome}/xfce4/helpers.rc".text = ''
-        WebBrowser=brave
-        TerminalEmulator=alacritty
-      '';
-    };
   };
 
   programs = import ./programs.nix {
@@ -48,15 +43,6 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  xdg = {
-    enable = true;
-    # stop beeping
-    configFile."autostart/beep.desktop".text = builtins.readFile ./config/xfce/beep.desktop;
-  };
-
   # https://tinted-theming.github.io/base16-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.railscasts;
-
-  xfconf.settings = linuxAttrs import ./config/xfce/xfconf.nix;
-
 }
