@@ -82,7 +82,6 @@ with epkgs;
   cargo-mode
   clojure-ts-mode
   kotlin-mode
-  lean-mode
   nix-mode
   nix-ts-mode
   shfmt
