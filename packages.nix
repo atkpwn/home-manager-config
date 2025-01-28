@@ -51,16 +51,6 @@ let
     meld
     newman
   ] ++
-  [
-    kubectl
-    (callPackage ./packages/kubectl-argo-rollouts.nix {})
-
-    k9s
-    kustomize
-    minikube
-    skaffold
-    stern
-  ] ++
   (if isDarwin then [
     colima
     rectangle
