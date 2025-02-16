@@ -1,8 +1,9 @@
-pkgs: epkgs:
+{ pkgs, ... }:
+
+epkgs:
 let
   org-modern-indent = (pkgs.callPackage ./org-modern-indent.nix { inherit pkgs epkgs; });
-in with epkgs;
-[
+in with epkgs; [
   ace-window
   aggressive-indent
   auctex
