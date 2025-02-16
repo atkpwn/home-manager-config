@@ -21,7 +21,15 @@ in {
   };
 
   # needed for nixd to be able to find correct packages
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix = {
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+    gc = {
+      automatic = true;
+      frequency = "weekly";
+      options   = "--delete-older-than 30d";
+    };
+  };
 
   home = {
     username = "attakorn";
