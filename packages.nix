@@ -33,7 +33,6 @@ let
     |> map (s: pkgs.callPackage s { });
 
   devTools = [
-    comma
     difftastic
     hyperfine
     ripgrep
@@ -90,9 +89,13 @@ let
     gnumake
   ]
   ++ [
+    alejandra
+    comma
+    nh
+    nix-output-monitor
     nixd
-    nixfmt-rfc-style
-    nixpkgs-fmt
+    # nixpkgs-fmt # current official
+    nvd
   ]
   ++ [
     ruff # linter & formatter
@@ -130,14 +133,14 @@ let
     ko
   ]
   ++ [
-    bun
     deno
+    nodejs
     nodePackages.typescript-language-server
-    nodejs_20
   ]
   ++ [
     lean
     nodePackages.bash-language-server
+    shellcheck
     shfmt
     texliveFull
   ];
@@ -149,7 +152,6 @@ let
     du-dust
     entr # https://eradman.com/entrproject/
     pv
-    xsv
     yq
 
     fastfetch

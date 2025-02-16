@@ -1,5 +1,7 @@
 pkgs: epkgs:
-with epkgs;
+let
+  org-modern-indent = (pkgs.callPackage ./org-modern-indent.nix { inherit pkgs epkgs; });
+in with epkgs;
 [
   ace-window
   aggressive-indent
@@ -17,6 +19,7 @@ with epkgs;
   consult-eglot
   consult-project-extra
   dashboard
+  deno-ts-mode
   devdocs
   diff-hl
   diffview
@@ -49,7 +52,7 @@ with epkgs;
   orderless
   org-appear
   org-modern
-  (callPackage ./org-modern-indent.nix { inherit pkgs epkgs; })
+  org-modern-indent
   org-roam
   org-superstar
   pdf-tools
