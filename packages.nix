@@ -6,6 +6,7 @@ let
 
   basic = [
     alacritty
+    git
     gnupg
     libreoffice
     p7zip
@@ -41,11 +42,11 @@ let
     dive
     docker
     docker-compose
+    docker-slim
     dockerfile-language-server-nodejs
     dockfmt
     lazydocker
 
-    git
     jq
     meld
     newman
@@ -62,19 +63,19 @@ let
     gimp
     gthumb
     inkscape
-    okular
   ];
 
   internet = [
     brave
     dogdns
+    dropbox
     google-chrome
     iftop
     qrencode
     rsync
   ];
 
-  entertainment = [
+  media = [
     audacity
     blanket
     spotify
@@ -100,11 +101,17 @@ let
   ++ [
     ruff # linter & formatter
 
-    (python312.withPackages (ps: with ps; [
+    (python313.withPackages (ps: with ps; [
       matplotlib
       numpy
       pandas
       scipy
+
+      httpx
+      jq
+      loguru
+      pytest
+      rich
 
       mypy # type checker
       pylsp-mypy
@@ -149,6 +156,7 @@ let
     bat
     bottom
     btop
+    calibre
     du-dust
     entr # https://eradman.com/entrproject/
     pv
@@ -176,5 +184,5 @@ basic
 ++ programming
 ++ graphics
 ++ internet
-++ entertainment
+++ media
 ++ misc
