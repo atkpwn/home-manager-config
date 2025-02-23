@@ -14,11 +14,13 @@ in with epkgs; [
   cider
   clj-refactor
   cmake-font-lock
-  corfu
+  citar
+  citar-embark
   consult
   consult-dir
   consult-eglot
   consult-project-extra
+  corfu
   dashboard
   deno-ts-mode
   devdocs
@@ -29,6 +31,7 @@ in with epkgs; [
   dockerfile-mode
   doom-modeline
   doom-themes
+  ef-themes
   elfeed
   elfeed-webkit
   embark
@@ -37,6 +40,7 @@ in with epkgs; [
   flycheck-clojure
   helpful
   highlight-indentation
+  jinx
   jq-format
   magit
   magit-delta
@@ -64,10 +68,6 @@ in with epkgs; [
   rainbow-delimiters
   rg
   selected
-  sly
-  sly-asdf
-  sly-quicklisp
-  sly-repl-ansi-color
   treemacs
   treemacs-magit
   treemacs-nerd-icons
