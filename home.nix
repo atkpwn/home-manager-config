@@ -14,6 +14,7 @@ in {
   nixpkgs = {
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "dropbox"
         "google-chrome"
         "spotify"
       ];
