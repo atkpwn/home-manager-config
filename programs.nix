@@ -109,6 +109,7 @@ in {
     shellAliases = {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       e         = "emacsclient";
+      g         = "git";
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
@@ -262,10 +263,13 @@ in {
     userName  = "Attakorn Putwattana";
     userEmail = "atkpwn@gmail.com";
     aliases = {
+      # some from https://github.com/nvie/git-toolbelt
       b     = "branch --color -v";
       c     = "checkout";
       cb    = "checkout -b";
       cm    = "checkout master";
+      cp    = "cherry-pick";
+      d     = "diff";
       difft = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
       fixup = "commit --amend --no-edit";
       l     = "log"
@@ -275,6 +279,8 @@ in {
               + " --abbrev-commit --date=relative";
       hist  = "log --follow -p --";
       p     = "pull";
+      s     = "status";
+      sign-after = "rebase -i --exec 'git commit --amend --no-edit --no-verify -S'";
       su    = "submodule update --init --recursive";
       undo  = "reset --soft HEAD^";
     };
