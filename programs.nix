@@ -64,7 +64,6 @@ in {
       export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate alabaster_dark)"
 
       source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
-      complete -C ${pkgs.awscli2}/bin/aws_completer aws
 
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
 
@@ -100,7 +99,6 @@ in {
     initExtraBeforeCompInit = ''
       fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
       fpath=(${pkgs.deno}/share/zsh/site-functions $fpath)
-      autoload bashcompinit && bashcompinit # for aws_completer
     '';
     profileExtra = lib.optionalString isDarwin ''
       if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
