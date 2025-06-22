@@ -17,6 +17,8 @@ in {
         "dropbox"
         "google-chrome"
         "spotify"
+        "firefox-bin"
+        "firefox-release-bin-unwrapped"
       ];
     };
   };
