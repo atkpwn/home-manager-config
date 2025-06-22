@@ -71,6 +71,7 @@ in with epkgs; [
   treemacs
   treemacs-magit
   treemacs-nerd-icons
+  treesit-fold
   treesit-grammars.with-all-grammars
   undo-tree
   unfill
