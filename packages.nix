@@ -152,7 +152,8 @@ let
     nodePackages.typescript-language-server
   ]
   ++ [
-    lean
+    elan # lean version manager
+
     nodePackages.bash-language-server
     shellcheck
     shfmt
