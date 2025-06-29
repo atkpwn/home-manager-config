@@ -8,5 +8,6 @@
     kustomize
     minikube
     skaffold
-    stern  ];
+    stern
+  ];
 }
