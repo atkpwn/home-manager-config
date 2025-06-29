@@ -18,7 +18,7 @@ in {
         "google-chrome"
         "spotify"
         "firefox-bin"
-        "firefox-release-bin-unwrapped"
+        "firefox-bin-unwrapped"
       ];
     };
   };

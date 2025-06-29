@@ -24,6 +24,7 @@ let
     inconsolata
     jetbrains-mono
     roboto-mono
+    symbols-only
   ];
 
   scripts = let
@@ -42,6 +43,7 @@ let
     dive
     docker
     docker-compose
+    docker-credential-helpers
     docker-slim
     dockerfile-language-server-nodejs
     dockfmt
@@ -50,6 +52,8 @@ let
     jq
     meld
     newman
+
+    harlequin
   ] ++
   (if isDarwin then [
     colima
@@ -123,6 +127,9 @@ let
     gradle
     jdk
     jdt-language-server
+    kotlin
+    kotlin-language-server
+    spring-boot-cli
   ]
   ++ [
     cargo
