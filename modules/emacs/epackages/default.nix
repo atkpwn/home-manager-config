@@ -2,7 +2,8 @@
 
 epkgs:
 let
-  org-modern-indent = (pkgs.callPackage ./org-modern-indent.nix { inherit pkgs epkgs; });
+  org-modern-indent = pkgs.callPackage ./org-modern-indent.nix { inherit epkgs; };
+  lean4-mode = pkgs.callPackage ./lean4-mode.nix { inherit epkgs; };
 in with epkgs; [
   ace-window
   aggressive-indent
@@ -42,6 +43,7 @@ in with epkgs; [
   highlight-indentation
   jinx
   jq-format
+  lean4-mode
   magit
   magit-delta
   marginalia
