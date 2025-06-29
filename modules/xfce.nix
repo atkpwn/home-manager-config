@@ -3,7 +3,7 @@
 {
   home.file = {
     "${config.xdg.configHome}/xfce4/helpers.rc".text = ''
-      WebBrowser=brave
+      WebBrowser=brave-browser
       TerminalEmulator=alacritty
     '';
   };

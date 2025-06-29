@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 
 let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
   defaultFont = "JetBrainsMono Nerd Font";
 in {
   home-manager.enable = true;
@@ -55,7 +55,7 @@ in {
         "z"
       ];
       ignoreSpace = true;
-      path        = "$HOME/${dotDir}/zsh_history";
+      path        = "$HOME/${dotDir}/history";
       save        = 500000;
       share       = true;
       size        = 50000;
@@ -95,6 +95,14 @@ in {
       function m() {
         emacsclient -ne "(man \"$1\")";
       }
+
+      function magit() {
+        PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
+        emacsclient -ne "(progn
+          (persp-switch \"''${1:-$(basename $PROJECT)}\")
+          (find-file \"$PROJECT\")
+          (magit-status))"
+      }
     '';
     initExtraBeforeCompInit = ''
       fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
@@ -110,19 +118,14 @@ in {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       e         = "emacsclient";
       g         = "git";
+      gcm       = "git checkout main";
+      gcmp      = "git checkout main && git pull";
+      gl        = "git l -10";
+      gp        = "git pull";
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gls       = "git ls-files | xargs wc -l";
       grep      = "grep --color=auto";
       k         = "kubectl";
-      magit = ''
-        (
-          PROJECT=$(git rev-parse --show-toplevel) && \
-          emacsclient -ne "(progn
-            (persp-switch \"''${PROJECT##*/}\")
-            (find-file \"$PROJECT\")
-            (magit-status))"
-        )
-      '';
       dired = ''
         (
           DIR=''${''${PWD##*/}:-/}
@@ -183,7 +186,7 @@ in {
           inherit style;
         };
         in {
-          size        = if isDarwin then 16.0 else 8.0;
+          size        = 16.0;
           normal      = jetbrainsMono "Regular";
           bold        = jetbrainsMono "Bold";
           italic      = jetbrainsMono "Italic";
@@ -298,6 +301,19 @@ in {
         trustctime = false;
         whitespace = "trailing-space,space-before-tab";
       };
+
+      # https://youtu.be/aolI_Rz0ZqY at 17:23
+      column = {
+	      ui = "auto";
+      };
+      branch = {
+	      sort = "-committerdate";
+      };
+      maintenance = {
+	      auto = false;
+	      strategy = "incremental";
+      };
+
       "url \"git@github.com:\"".insteadOf = "https://github.com/";
     };
   };
@@ -378,6 +394,7 @@ in {
         set -g @tokyo-night-tmux_pane_id_style hide
         set -g @tokyo-night-tmux_zoom_id_style hide # dsquare
         set -g @tokyo-night-tmux_show_git 0
+        set -g @tokyo-night-tmux_show_datetime 0
       '';
       };
       catppuccin = {
