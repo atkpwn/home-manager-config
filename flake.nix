@@ -30,7 +30,7 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
-          nix-index-database.hmModules.nix-index
+          nix-index-database.homeModules.nix-index
         ];
 
         # Optionally use extraSpecialArgs

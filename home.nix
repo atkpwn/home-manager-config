@@ -37,7 +37,7 @@ in {
   home = {
     username = "attakorn";
     homeDirectory = "/home/attakorn";
-    stateVersion = "22.11";
+    stateVersion = "25.11";
     keyboard = {
       layout = "us,th";
       variant = "altgr-intl,";
@@ -53,7 +53,9 @@ in {
     inherit pkgs config lib;
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+  };
 
   # https://tinted-theming.github.io/base16-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.railscasts;
