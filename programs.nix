@@ -390,16 +390,30 @@ in {
           hash = "sha256-ATaSfJSg/Hhsd4LwoUgHkAApcWZV3O3kLOn61r1Vbag=";
         };
         extraConfig = ''
-        set -g @tokyo-night-tmux_window_id_style none
-        set -g @tokyo-night-tmux_pane_id_style hide
-        set -g @tokyo-night-tmux_zoom_id_style hide # dsquare
-        set -g @tokyo-night-tmux_show_git 0
-        set -g @tokyo-night-tmux_show_datetime 0
-      '';
+          set -g @tokyo-night-tmux_window_id_style none
+          set -g @tokyo-night-tmux_pane_id_style hide
+          set -g @tokyo-night-tmux_zoom_id_style hide # dsquare
+          set -g @tokyo-night-tmux_show_git 0
+          set -g @tokyo-night-tmux_show_datetime 0
+        '';
       };
       catppuccin = {
-        plugin = catppuccin;
-        extraConfig = "set -g @catppuccin_flavour 'mocha'";
+        plugin = pkgs.tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_window_status_style "rounded"
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -agF status-right "#{E:@catppuccin_status_cpu}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
+          # set -ag status-right "#{E:@catppuccin_status_uptime}"
+          set -agF status-right "#{E:@catppuccin_status_battery}"
+
+          set -g @catppuccin_window_current_text "#{?#{!=:#{window_name},}, #W,}"
+          set -g @catppuccin_window_text "#{?#{!=:#{window_name},}, #W,}"
+        '';
       };
     in [
       pkgs.tmuxPlugins.resurrect
