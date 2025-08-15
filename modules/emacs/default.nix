@@ -35,6 +35,8 @@ in
       poppler_utils
       fd
       imagemagick
+
+      direnv
     ];
   };
 }

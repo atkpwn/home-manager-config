@@ -33,12 +33,15 @@ in with epkgs; [
   doom-modeline
   doom-themes
   ef-themes
+  eldoc-box
   elfeed
   elfeed-webkit
   embark
   embark-consult
+  envrc
   expand-region
   flycheck-clojure
+  flymake-ruff
   helpful
   highlight-indentation
   jinx
