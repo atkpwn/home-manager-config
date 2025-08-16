@@ -9,5 +9,11 @@
     minikube
     skaffold
     stern
-  ];
+  ] ++ (
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then [
+      colima
+    ]
+    else []
+  );
 }
