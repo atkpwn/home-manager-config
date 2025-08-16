@@ -39,7 +39,7 @@ in {
     dirHashes = {
       dl = "$HOME/Downloads";
     };
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     envExtra = lib.optionalString isDarwin ''
       [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
     '';
@@ -55,59 +55,64 @@ in {
         "z"
       ];
       ignoreSpace = true;
-      path        = "$HOME/${dotDir}/history";
+      path        = "${dotDir}/history";
       save        = 500000;
       share       = true;
       size        = 50000;
     };
-    initExtra = ''
-      export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate alabaster_dark)"
+    initContent = let
+      zshConfigEarlyInit = lib.mkOrder 500 ''
+        fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
+        fpath=(${pkgs.deno}/share/zsh/site-functions $fpath)
+      '';
+      zshConfig = lib.mkOrder 1000 ''
+        export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate alabaster_dark)"
 
-      source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
+        source "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh"
 
-      source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
+        source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
 
-      # from: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
-      # disable sort when completing `git checkout`
-      zstyle ':completion:*:git-checkout:*' sort false
-      # set descriptions format to enable group support
-      # NOTE: don't use escape sequences here, fzf-tab will ignore them
-      zstyle ':completion:*:descriptions' format '[%d]'
-      # set list-colors to enable filename colorizing
-      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-      # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-      zstyle ':completion:*' menu no
-      # preview directory's content with eza when completing cd
-      zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
-      zstyle ':fzf-tab:complete:z:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
-      # custom fzf flags
-      # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-      zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-      # To make fzf-tab follow FZF_DEFAULT_OPTS.
-      # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
-      zstyle ':fzf-tab:*' use-fzf-default-opts yes
-      # switch group using `<` and `>`
-      zstyle ':fzf-tab:*' switch-group '<' '>'
+        # from: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
+        # disable sort when completing `git checkout`
+        zstyle ':completion:*:git-checkout:*' sort false
+        # set descriptions format to enable group support
+        # NOTE: don't use escape sequences here, fzf-tab will ignore them
+        zstyle ':completion:*:descriptions' format '[%d]'
+        # set list-colors to enable filename colorizing
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+        zstyle ':completion:*' menu no
+        # preview directory's content with eza when completing cd
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
+        zstyle ':fzf-tab:complete:z:*' fzf-preview '${pkgs.eza}/bin/eza -1 --color=always $realpath'
+        # custom fzf flags
+        # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+        zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+        # To make fzf-tab follow FZF_DEFAULT_OPTS.
+        # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+        zstyle ':fzf-tab:*' use-fzf-default-opts yes
+        # switch group using `<` and `>`
+        zstyle ':fzf-tab:*' switch-group '<' '>'
 
-      [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-      [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+        [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+        [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-      function m() {
-        emacsclient -ne "(man \"$1\")";
-      }
+        function m() {
+          emacsclient -ne "(man \"$1\")";
+        }
 
-      function magit() {
-        PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
-        emacsclient -ne "(progn
-          (persp-switch \"''${1:-$(basename $PROJECT)}\")
-          (find-file \"$PROJECT\")
-          (magit-status))"
-      }
-    '';
-    initExtraBeforeCompInit = ''
-      fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
-      fpath=(${pkgs.deno}/share/zsh/site-functions $fpath)
-    '';
+        function magit() {
+          PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
+          emacsclient -ne "(progn
+            (persp-switch \"''${1:-$(basename $PROJECT)}\")
+            (find-file \"$PROJECT\")
+            (magit-status))"
+        }
+      '';
+    in lib.mkMerge [
+      zshConfigEarlyInit
+      zshConfig
+    ];
     profileExtra = lib.optionalString isDarwin ''
       if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
         source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
