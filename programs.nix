@@ -289,7 +289,8 @@ in {
       p     = "pull";
       s     = "status";
       sign-after = "rebase -i --exec 'git commit --amend --no-edit --no-verify -S'";
-      su    = "submodule update --init --recursive";
+      sub   = "submodule";
+      subu  = "submodule update --init --recursive";
       undo  = "reset --soft HEAD^";
     };
     delta = {
@@ -317,6 +318,10 @@ in {
       maintenance = {
 	      auto = false;
 	      strategy = "incremental";
+      };
+
+      submodule = {
+        recurse = true;
       };
 
       "url \"git@github.com:\"".insteadOf = "https://github.com/";
