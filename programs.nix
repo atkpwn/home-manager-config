@@ -259,10 +259,28 @@ in {
       editor = "emacsclient";
       git_protocol = "ssh";
       aliases = {
-        co = "pr checkout";
-        pv = "pr view";
+        co  = "pr checkout";
+        b   = "browse";
+        pv  = "pr view";
         prs = "pr list -A atkpwn";
+        create = "repo create --private --source=. --remote=origin";
       };
+    };
+  };
+
+  gh-dash = {
+    enable = true;
+    settings = {
+      prSections = [
+        {
+          title = "My Pull Requests";
+          filters = "is:open author:@me";
+        }
+        {
+          title = "Involed";
+          filters = ''is:open involves:@me -author:@me updated>={{ nowModify "-2w" }}'';
+        }
+      ];
     };
   };
 
@@ -292,6 +310,10 @@ in {
       sub   = "submodule";
       subu  = "submodule update --init --recursive";
       undo  = "reset --soft HEAD^";
+      w     = "worktree";
+      wa    = "worktree add";
+      wl    = "worktree list";
+      wrc   = "worktree remove .";
     };
     delta = {
       enable = true;
