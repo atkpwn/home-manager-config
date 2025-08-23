@@ -64,6 +64,6 @@ in {
     enable = true;
   };
 
-  # https://tinted-theming.github.io/base16-gallery/
+  # https://tinted-theming.github.io/tinted-gallery/
   colorScheme = inputs.nix-colors.colorSchemes.railscasts;
 }
