@@ -24,8 +24,15 @@ in {
   };
 
   # needed for nixd to be able to find correct packages
-  nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    # see https://github.com/Misterio77/nix-config/blob/36f76f9a4e6dd45c692755858a248c26883184f5/hosts/common/global/nix.nix#L39
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+
+    package = pkgs.nix; # required for generating nix.conf
+    settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
 
     gc = {
       automatic = true;
