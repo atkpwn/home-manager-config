@@ -363,13 +363,9 @@ in {
 
   ssh = {
     enable = true;
+    enableDefaultConfig = false;
     extraConfig = ''
-      UseKeychain yes
-      AddkeysToAgent yes
-      IgnoreUnknown UseKeychain
-      ConnectTimeout 5
     '';
-    hashKnownHosts = true;
     matchBlocks = {
       bitbucket = {
         hostname       = "bitbucket.org";
@@ -381,17 +377,24 @@ in {
         identitiesOnly = true;
         identityFile   = "~/.ssh/bigfoot";
       };
-      keychain = {
-        host = "*";
+      "*" = {
+        addKeysToAgent = "no";
+        compression = false;
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+        forwardAgent   = false;
+        hashKnownHosts = true;
+        serverAliveCountMax = 3;
+        serverAliveInterval = 60;
+        userKnownHostsFile  = "~/.ssh/known_hosts";
         extraOptions = {
-          UseKeychain    = "yes";
-          AddKeysToAgent = "yes";
+          ConnectTimeout = "5";
           IgnoreUnknown  = "UseKeychain";
+          UseKeychain    = "yes";
         };
       };
     };
-    serverAliveInterval = 60;
-    userKnownHostsFile  = "~/.ssh/known_hosts";
   };
 
   tmux = {
