@@ -4,7 +4,6 @@ let
   inherit (pkgs) lib;
 in {
   imports = [
-    inputs.nix-colors.homeManagerModules.default
     ./modules/xfce.nix
     ./modules/rofi.nix
     ./modules/emacs
@@ -63,7 +62,4 @@ in {
   fonts.fontconfig = {
     enable = true;
   };
-
-  # https://tinted-theming.github.io/tinted-gallery/
-  colorScheme = inputs.nix-colors.colorSchemes.railscasts;
 }

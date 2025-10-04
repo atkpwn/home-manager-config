@@ -151,22 +151,6 @@ in {
     # see https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
     settings = {
       env = { TERM = "xterm-256color"; };
-      colors = with config.colorScheme.palette; {
-        primary = {
-          background = "#${base00}";
-          foreground = "#${base07}";
-        };
-        normal = {
-          black   = "#${base00}";
-          red     = "#${base08}";
-          green   = "#${base0B}";
-          yellow  = "#${base0A}";
-          blue    = "#${base0D}";
-          magenta = "#${base0E}";
-          cyan    = "#${base0C}";
-          white   = "#${base07}";
-        };
-      };
       cursor = {
         style.blinking = "On";
         blink_interval = 500;
