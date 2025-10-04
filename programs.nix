@@ -197,6 +197,22 @@ in {
     });
   };
 
+  ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      title = "Ghostty";
+      theme = "Arthur";
+      font-family = defaultFont;
+      font-size = 16;
+      background-opacity = 0.9;
+      gtk-titlebar = false;
+      macos-option-as-alt = true;
+      mouse-hide-while-typing = true;
+      window-decoration = false;
+    };
+  };
+
   broot = {
     enable = true;
     enableZshIntegration = true;
