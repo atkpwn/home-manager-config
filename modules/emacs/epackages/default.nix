@@ -69,7 +69,6 @@ in with epkgs; [
   perspective
   popper
   project-treemacs
-  pyvenv
   rainbow-delimiters
   rg
   selected

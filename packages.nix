@@ -2,8 +2,6 @@
 with pkgs;
 
 let
-  isDarwin = stdenv.hostPlatform.isDarwin;
-
   basic = [
     alacritty
     git
@@ -22,6 +20,7 @@ let
   fonts = with nerd-fonts; [
     fira-code
     inconsolata
+    iosevka
     jetbrains-mono
     roboto-mono
     symbols-only
@@ -35,6 +34,7 @@ let
     |> map (s: pkgs.callPackage s { });
 
   devTools = [
+    act
     difftastic
     hyperfine
     ripgrep
@@ -45,21 +45,22 @@ let
     docker-compose
     docker-credential-helpers
     docker-slim
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     dockfmt
     lazydocker
 
+    grype
+    syft
+
     jq
+    jqp
     meld
     newman
+  ];
 
-    harlequin
-  ] ++
-  (if isDarwin then [
-    colima
-    rectangle
-    unixtools.nettools
-  ] else []);
+  perfTools = [
+    iperf
+  ];
 
   graphics = [
     darktable
@@ -71,10 +72,13 @@ let
 
   internet = [
     brave
+    dig
     dogdns
     dropbox
     google-chrome
     iftop
+    ipcalc
+    nmap
     qrencode
     rsync
   ];
@@ -82,27 +86,31 @@ let
   media = [
     audacity
     blanket
+    calibre
     spotify
   ];
 
   programming = [
+    # c/c++
     ccls
+    # gcc
     clang
     cmake
     cmake-language-server
     gdb
     gnumake
-  ]
-  ++ [
+
+    # nix
     alejandra
     comma
+    lorri
     nh
     nix-output-monitor
     nixd
     # nixpkgs-fmt # current official
     nvd
-  ]
-  ++ [
+
+    # python
     ruff # linter & formatter
 
     (python313.withPackages (ps: with ps; [
@@ -122,22 +130,22 @@ let
       python-lsp-ruff
       python-lsp-server
     ]))
-  ]
-  ++ [
+
+    # java + jvm
     gradle
-    jdk
+    jdk24
     jdt-language-server
     kotlin
     kotlin-language-server
     spring-boot-cli
-  ]
-  ++ [
+
+    # rust
     cargo
     rust-analyzer
     rustc
     rustfmt
-  ]
-  ++ [
+
+    # go
     go
     go-task
     gofumpt
@@ -145,15 +153,16 @@ let
     gotest # `go test' with colors
     gotools
     ko
-  ]
-  ++ [
+
+    # javascript + typescript
     deno
     nodejs
     nodePackages.typescript-language-server
-  ]
-  ++ [
-    elan # lean version manager
 
+    # lean version manager
+    elan
+
+    # others
     nodePackages.bash-language-server
     shellcheck
     shfmt
@@ -164,23 +173,22 @@ let
     bat
     bottom
     btop
-    calibre
     du-dust
     entr # https://eradman.com/entrproject/
+    file-roller # archive manager
+    gnome-disk-utility
+    htop
+    isoimagewriter
+    procs
     pv
     yq
 
     fastfetch
-    gnome-disk-utility
-    htop
     lsof
     pstree
 
     cmatrix
     figlet
-    file-roller # archive manager
-
-    isoimagewriter
   ];
 
 in
