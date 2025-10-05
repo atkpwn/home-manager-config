@@ -123,14 +123,15 @@ in {
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       e         = "emacsclient";
       g         = "git";
-      gcm       = "git checkout main";
-      gcmp      = "git checkout main && git pull";
-      gl        = "git l -10";
-      gp        = "git pull";
+      gm        = "git checkout main";
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
+      gl        = "git l -10";
       gls       = "git ls-files | xargs wc -l";
+      gmp       = "git checkout main && git pull";
+      gp        = "git pull";
+      p         = "cd $(git rev-parse --show-toplevel)";
       grep      = "grep --color=auto";
-      k         = "kubectl";
+      k         = "${pkgs.kubectl}/bin/kubectl";
       dired = ''
         (
           DIR=''${''${PWD##*/}:-/}
