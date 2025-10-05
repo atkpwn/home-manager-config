@@ -414,6 +414,23 @@ in {
     keyMode      = "emacs";
     mouse        = true;
     plugins      = let
+      catppuccin = {
+        plugin = pkgs.tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_window_status_style "rounded"
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
+          set -agF status-right "#{E:@catppuccin_status_battery}"
+
+          set -g @catppuccin_window_current_text "#{?#{!=:#{window_name},}, #W,}"
+          set -g @catppuccin_window_text "#{?#{!=:#{window_name},}, #W,}"
+        '';
+      };
       tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin rec {
         pluginName = "tokyo-night";
         version = "1.5.5";
@@ -432,24 +449,6 @@ in {
           set -g @tokyo-night-tmux_show_datetime 0
         '';
       };
-      catppuccin = {
-        plugin = pkgs.tmuxPlugins.catppuccin;
-        extraConfig = ''
-          set -g @catppuccin_flavor "mocha"
-          set -g @catppuccin_window_status_style "rounded"
-          set -g status-right-length 100
-          set -g status-left-length 100
-          set -g status-left ""
-          set -g status-right "#{E:@catppuccin_status_application}"
-          set -agF status-right "#{E:@catppuccin_status_cpu}"
-          set -ag status-right "#{E:@catppuccin_status_session}"
-          # set -ag status-right "#{E:@catppuccin_status_uptime}"
-          set -agF status-right "#{E:@catppuccin_status_battery}"
-
-          set -g @catppuccin_window_current_text "#{?#{!=:#{window_name},}, #W,}"
-          set -g @catppuccin_window_text "#{?#{!=:#{window_name},}, #W,}"
-        '';
-      };
       yank = {
         plugin = pkgs.tmuxPlugins.yank;
         extraConfig = ''
@@ -457,9 +456,12 @@ in {
         '';
       };
     in with pkgs.tmuxPlugins; [
-      catppuccin
+      battery
+      copycat
+      # catppuccin
+      # cpu
       resurrect
-      # tokyo-night
+      tokyo-night
       yank
     ];
     prefix   = "C-z";
