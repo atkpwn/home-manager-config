@@ -369,6 +369,12 @@ in {
       add_newline     = isDarwin;
       command_timeout = 2000;
       aws.format      = ''[($symbol$profile )(\[$duration\] )]($style)'';
+      right_format = "$time";
+      time = {
+        disabled = false;
+        format   = "[$time]($style)";
+        style    = "fg:#646864";
+      };
     };
   };
 
