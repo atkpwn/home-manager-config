@@ -21,10 +21,11 @@ in {
     historyFile = ".config/bash_history";
     historyFileSize = 500000;
     historyIgnore = [
-      "eza"
       "exit"
+      "eza"
       "history"
       "ls"
+      "pophist"
       "tmux"
     ];
     historySize = 50000;

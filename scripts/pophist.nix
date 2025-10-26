@@ -1,5 +1,17 @@
 { pkgs }:
 
-pkgs.writeShellScriptBin "pophist" ''
-  ${pkgs.gnused}/bin/sed -i '$d' ''${HISTFILE}
-''
+pkgs.writeShellApplication {
+  name = "pophist";
+
+  runtimeInputs = with pkgs; [ gnused ];
+
+  text = ''
+    sed -i '$d' "''${HOME}/.config/zsh/history"
+  '';
+
+  bashOptions = [
+    "errexit"
+    # "nounset" # allow unbound variable
+    "pipefail"
+  ];
+}
