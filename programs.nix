@@ -352,6 +352,15 @@ in {
     };
   };
 
+  password-store = {
+    enable = true;
+    package = pkgs.pass.withExtensions (exts: [
+      exts.pass-otp
+      exts.pass-genphrase
+    ]);
+    settings.PASSWORD_STORE_DIR = "$HOME/.password-store";
+  };
+
   starship = {
     enable = true;
     enableBashIntegration = true;
