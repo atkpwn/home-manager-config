@@ -56,7 +56,7 @@ in {
   };
 
   programs = import ./programs.nix {
-    inherit pkgs config lib;
+    inherit config pkgs;
   };
 
   fonts.fontconfig = {

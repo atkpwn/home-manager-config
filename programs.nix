@@ -1,6 +1,7 @@
-{ pkgs, config, lib, ... }:
+{ config, pkgs, ... }:
 
 let
+  inherit (pkgs) lib;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   defaultFont = "JetBrainsMono Nerd Font";
 in {
@@ -121,6 +122,8 @@ in {
       fi
     '';
     shellAliases = {
+      ".."      = "cd ..";
+      "..."     = "cd .. && cd ..";
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       e         = "emacsclient";
       g         = "git";
