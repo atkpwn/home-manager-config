@@ -4,6 +4,7 @@ let
   inherit (pkgs) lib;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   defaultFont = "JetBrainsMono Nerd Font";
+  home = config.home.homeDirectory;
 in {
   home-manager.enable = true;
 
@@ -391,15 +392,13 @@ in {
     extraConfig = ''
     '';
     matchBlocks = {
-      bitbucket = {
-        hostname       = "bitbucket.org";
+      "bitbucket.org" = {
         identitiesOnly = true;
-        identityFile   = "~/.ssh/bigfoot";
+        identityFile   = "${home}/.ssh/bigfoot";
       };
-      github = {
-        hostname       = "github.com";
+      "github.com" = {
         identitiesOnly = true;
-        identityFile   = "~/.ssh/bigfoot";
+        identityFile   = "${home}/.ssh/bigfoot";
       };
       "*" = {
         addKeysToAgent = "no";
