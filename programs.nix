@@ -229,6 +229,15 @@ in {
     ];
   };
 
+  delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      # see https://dandavison.github.io/delta/full---help-output.html
+      plus-style = "syntax bold '#1A3A1A'";
+    };
+  };
+
   eza = {
     enable = true;
     extraOptions = [
@@ -291,43 +300,38 @@ in {
 
   git = {
     enable = true;
-    userName  = "Attakorn Putwattana";
-    userEmail = "atkpwn@gmail.com";
-    aliases = {
-      # some from https://github.com/nvie/git-toolbelt
-      b     = "branch --color -v";
-      c     = "checkout";
-      cb    = "checkout -b";
-      cm    = "checkout master";
-      cp    = "cherry-pick";
-      d     = "diff";
-      difft = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
-      fixup = "commit --amend --no-edit";
-      l     = "log"
+    settings = {
+      user  = {
+        name  = "Attakorn Putwattana";
+        email = "atkpwn@gmail.com";
+      };
+      alias = {
+        # some from https://github.com/nvie/git-toolbelt
+        b     = "branch --color -v";
+        c     = "checkout";
+        cb    = "checkout -b";
+        cm    = "checkout master";
+        cp    = "cherry-pick";
+        d     = "diff";
+        difft = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
+        fixup = "commit --amend --no-edit";
+        l     = "log"
               + " --graph"
               + " --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset"
               + " %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
               + " --abbrev-commit --date=relative";
-      hist  = "log --follow -p --";
-      p     = "pull";
-      s     = "status";
-      sign-after = "rebase -i --exec 'git commit --amend --no-edit --no-verify -S'";
-      sub   = "submodule";
-      subu  = "submodule update --init --recursive";
-      undo  = "reset --soft HEAD^";
-      w     = "worktree";
-      wa    = "worktree add";
-      wl    = "worktree list";
-      wrc   = "worktree remove .";
-    };
-    delta = {
-      enable = true;
-      options = {
-        # see https://dandavison.github.io/delta/full---help-output.html
-        plus-style = "syntax bold '#1A3A1A'";
+        hist  = "log --follow -p --";
+        p     = "pull";
+        s     = "status";
+        sign-after = "rebase -i --exec 'git commit --amend --no-edit --no-verify -S'";
+        sub   = "submodule";
+        subu  = "submodule update --init --recursive";
+        undo  = "reset --soft HEAD^";
+        w     = "worktree";
+        wa    = "worktree add"; # ../directory branch
+        wl    = "worktree list";
+        wrc   = "worktree remove .";
       };
-    };
-    extraConfig = {
       init.defaultBranch = "main";
       core = {
         editor     = "emacsclient";
