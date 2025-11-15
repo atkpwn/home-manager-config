@@ -133,7 +133,7 @@ let
 
     # java + jvm
     gradle
-    jdk24
+    javaPackages.compiler.openjdk25
     jdt-language-server
     kotlin
     kotlin-language-server
@@ -173,7 +173,7 @@ let
     bat
     bottom
     btop
-    du-dust
+    dust
     entr # https://eradman.com/entrproject/
     file-roller # archive manager
     gnome-disk-utility
