@@ -40,7 +40,7 @@ in {
     autosuggestion.enable = true;
     defaultKeymap = "emacs";
     dirHashes = {
-      dl = "$HOME/Downloads";
+      dl = "${home}/Downloads";
     };
     dotDir = "${config.xdg.configHome}/zsh";
     envExtra = lib.optionalString isDarwin ''
@@ -97,8 +97,8 @@ in {
         # switch group using `<` and `>`
         zstyle ':fzf-tab:*' switch-group '<' '>'
 
-        [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-        [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+        [ -f "${home}/.ghcup/env" ] && source "$HOME/.ghcup/env"
+        [ -f "${home}/.cargo/env" ] && source "$HOME/.cargo/env"
 
         function m() {
           emacsclient -ne "(man \"$1\")";
@@ -119,7 +119,7 @@ in {
     profileExtra = lib.optionalString isDarwin ''
       if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
         source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        export NIX_PATH="$HOME/.nix-defexpr"
+        export NIX_PATH="${home}/.nix-defexpr"
       fi
     '';
     shellAliases = {
@@ -147,7 +147,7 @@ in {
       '';
       tree = "${pkgs.eza}/bin/eza --tree";
     } // lib.optionalAttrs isDarwin {
-      emacs = ''open "$HOME/Applications/Home Manager Apps/Emacs.app"'';
+      emacs = ''open "${home}/Applications/Home Manager Apps/Emacs.app"'';
       google-chrome = ''open "/Applications/Google Chrome.app"'';
     };
   };
@@ -366,7 +366,7 @@ in {
       exts.pass-otp
       exts.pass-genphrase
     ]);
-    settings.PASSWORD_STORE_DIR = "$HOME/.password-store";
+    settings.PASSWORD_STORE_DIR = "${home}/.password-store";
   };
 
   starship = {
