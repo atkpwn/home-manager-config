@@ -49,6 +49,6 @@ HL=$(tput setaf 4)$(tput bold)
 RESET=$(tput sgr0)
 echo "${HL}${LOMBOK_JAR}${RESET}"
 
-echo "export JAVA_TOOL_OPTIONS=\"${LOMBOK_JAR}\"" > .envrc
+echo "export JAVA_TOOL_OPTIONS=\"-javaagent:${LOMBOK_JAR}\"" > .envrc
 echo
 echo "Wrote selected Lombok JAR to .envrc's JAVA_TOOL_OPTIONS."
