@@ -2,8 +2,9 @@
 {
   home.packages = with pkgs; [
     kubectl
-    (callPackage ./kubectl-argo-rollouts.nix {})
 
+    argo-rollouts
+    helm
     k9s
     kustomize
     minikube
