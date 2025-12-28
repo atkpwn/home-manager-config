@@ -2,18 +2,18 @@
 {
   home.packages = with pkgs; [
     kubectl
-    (callPackage ./kubectl-argo-rollouts.nix {})
 
+    argo-rollouts
     k9s
+    kubernetes-helm
     kustomize
     minikube
     skaffold
     stern
-  ] ++ (
-    if pkgs.stdenv.hostPlatform.isDarwin
-    then [
-      colima
-    ]
-    else []
+  ] ++ (if pkgs.stdenv.hostPlatform.isDarwin
+  then [
+    colima
+  ]
+  else []
   );
 }
