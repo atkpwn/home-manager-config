@@ -6,7 +6,6 @@ in {
   imports = [
     ./modules/xfce.nix
     ./modules/rofi.nix
-    ./modules/emacs
     ./modules/kubernetes
   ];
 
