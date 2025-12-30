@@ -14,6 +14,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    emacs-with-env = {
+      url = "github:atkpwn/emacs-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs:
@@ -29,6 +34,7 @@
         modules = [
           ./home.nix
           inputs.nix-index-database.homeModules.nix-index
+          inputs.emacs-with-env.homeModules.emacs-with-env
         ];
 
         # Optionally use extraSpecialArgs

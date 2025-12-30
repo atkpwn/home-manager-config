@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "emacs-with-env": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767095924,
+        "narHash": "sha256-vO7n7cDvrcp/1826O5sj5U1kleQY+hU8k4o1hMBYMO4=",
+        "owner": "atkpwn",
+        "repo": "emacs-config",
+        "rev": "c14a49acb08d5aed8f3b15d8579af8916d7bd7b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "atkpwn",
+        "repo": "emacs-config",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -58,6 +78,7 @@
     },
     "root": {
       "inputs": {
+        "emacs-with-env": "emacs-with-env",
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs"
