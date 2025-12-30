@@ -4,13 +4,12 @@ tar --create --file - \
     Documents \
     Downloads \
     orgfiles \
-    roam \
     Pictures \
     problems \
     projects \
     .config/emacs \
     .config/home-manager \
-    .config/zsh/zsh_history \
+    .config/zsh/history \
     .ssh \
     | pv -ab | zstd -T0 -c > "$(date '+%Y-%m-%d')-backup.tar.zst"
 popd
