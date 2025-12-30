@@ -134,7 +134,9 @@ let
     # java + jvm
     gradle
     javaPackages.compiler.openjdk25
-    jdt-language-server
+    (jdt-language-server.override {
+      jdk = javaPackages.compiler.openjdk25;
+    })
     kotlin
     kotlin-language-server
     spring-boot-cli
