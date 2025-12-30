@@ -240,6 +240,11 @@ in {
     };
   };
 
+  direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   eza = {
     enable = true;
     extraOptions = [

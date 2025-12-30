@@ -62,4 +62,10 @@ in {
   fonts.fontconfig = {
     enable = true;
   };
+
+  services = {
+    lorri = {
+      enable = true;
+    };
+  };
 }
