@@ -4,8 +4,8 @@ let
   inherit (pkgs) lib;
 in {
   imports = [
-    ./modules/xfce.nix
-    ./modules/rofi.nix
+    ./modules/xfce
+    ./modules/rofi
     ./modules/kubernetes
   ];
 

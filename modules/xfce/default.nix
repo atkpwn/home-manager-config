@@ -11,10 +11,14 @@
   xdg = {
     enable = true;
     # stop beeping
-    configFile."autostart/beep.desktop".text = builtins.readFile ../config/xfce/beep.desktop;
+    configFile."autostart/beep.desktop".text = builtins.readFile ./beep.desktop;
   };
 
+  # maybe https://gist.github.com/nat-418/1101881371c9a7b419ba5f944a7118b0
   xfconf.settings = {
+    # 0xff50 Home
+    # 0xff57 End
+    # see https://github.com/novoid/nixos-config/blob/main/homemanager/xfce.nix
     xfwm4 = {
       "general/workspace_count" = 2;
     };
@@ -28,6 +32,8 @@
       "xfwm4/custom/<Super>Up"     = "tile_up_key";
       "xfwm4/custom/<Super>Left"   = "tile_left_key";
       "xfwm4/custom/<Super>Right"  = "tile_right_key";
+      # "xfwm4/custom/<Primary>a"    = "";
+      # "xfwm4/custom/<Primary>e"    = "";
       "xfwm4/custom/<Super>Return" = "maximize_window_key";
       "xfwm4/custom/<Primary><Alt><Shift>Left"  = "move_window_prev_workspace_key";
       "xfwm4/custom/<Primary><Alt><Shift>Right" = "move_window_next_workspace_key";

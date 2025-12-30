@@ -27,6 +27,6 @@ in
       pkgs.rofi-emoji
     ];
     terminal = "alacritty";
-    theme = ../config/rofi/tomorrow-night.rasi;
+    theme = ./tomorrow-night.rasi;
   };
 }
