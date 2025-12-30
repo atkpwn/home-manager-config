@@ -8,7 +8,6 @@ let
     gnupg
     libreoffice
     p7zip
-    pass
     starship
     tmux
     xclip
@@ -79,6 +78,7 @@ let
     iftop
     ipcalc
     nmap
+    openssl
     qrencode
     rsync
   ];
@@ -103,7 +103,6 @@ let
     # nix
     alejandra
     comma
-    lorri
     nh
     nix-output-monitor
     nixd
@@ -113,6 +112,7 @@ let
     # python
     ruff # linter & formatter
 
+    uv
     (python313.withPackages (ps: with ps; [
       matplotlib
       numpy
