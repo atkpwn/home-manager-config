@@ -178,7 +178,7 @@ let
     file-roller # archive manager
     gnome-disk-utility
     htop
-    isoimagewriter
+    kdePackages.isoimagewriter
     procs
     pv
     yq
