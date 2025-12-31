@@ -510,7 +510,7 @@ in {
     enableBashIntegration = true;
     enableZshIntegration  = true;
     options = [
-      "--cmd cd"
+      # "--cmd cd"
     ];
   };
 }
