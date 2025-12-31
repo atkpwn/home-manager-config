@@ -403,11 +403,13 @@ in {
     extraConfig = ''
     '';
     matchBlocks = {
-      "bitbucket.org" = {
+      bitbucket = {
+        host           = "bitbucket.org";
         identitiesOnly = true;
         identityFile   = "${home}/.ssh/bigfoot";
       };
-      "github.com" = {
+      github = {
+        host           = "github.com";
         identitiesOnly = true;
         identityFile   = "${home}/.ssh/bigfoot";
       };
@@ -418,10 +420,10 @@ in {
         controlPath = "~/.ssh/master-%r@%n:%p";
         controlPersist = "no";
         forwardAgent   = false;
-        hashKnownHosts = true;
+        # hashKnownHosts = true;
         serverAliveCountMax = 3;
         serverAliveInterval = 60;
-        userKnownHostsFile  = "~/.ssh/known_hosts";
+        userKnownHostsFile  = "${home}/.ssh/known_hosts";
         extraOptions = {
           ConnectTimeout = "5";
           IgnoreUnknown  = "UseKeychain";
