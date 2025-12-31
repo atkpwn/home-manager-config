@@ -63,6 +63,11 @@ in {
   };
 
   services = {
+    gpg-agent = {
+      enable = true;
+      pinentry.package = pkgs.pinentry-all;
+    };
+
     lorri = {
       enable = true;
     };

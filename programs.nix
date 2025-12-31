@@ -366,6 +366,11 @@ in {
     };
   };
 
+  gpg = {
+    enable = true;
+    homedir = "${config.xdg.configHome}/gnupg";
+  };
+
   password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [
