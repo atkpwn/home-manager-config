@@ -218,6 +218,10 @@ in {
       macos-option-as-alt = true;
       mouse-hide-while-typing = true;
       window-decoration = false;
+      keybind = if isDarwin then [
+        "cmd+f=esc:f"
+        "cmd+b=esc:b"
+      ] else [];
     };
   };
 
