@@ -332,6 +332,7 @@ in {
               + " --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset"
               + " %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
               + " --abbrev-commit --date=relative";
+        lol   = "log --graph --oneline --decorate --color --all";
         hist  = "log --follow -p --";
         p     = "pull";
         s     = "status";
