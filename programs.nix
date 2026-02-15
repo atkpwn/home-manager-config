@@ -306,31 +306,32 @@ in {
       };
       alias = {
         # some from https://github.com/nvie/git-toolbelt
-        b     = "branch --color -v";
-        c     = "checkout";
-        cb    = "checkout -b";
-        cm    = "checkout master";
-        cp    = "cherry-pick";
-        d     = "diff";
-        difft = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
-        fixup = "commit --amend --no-edit";
-        l     = "log"
-              + " --graph"
-              + " --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset"
-              + " %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-              + " --abbrev-commit --date=relative";
-        lol   = "log --graph --oneline --decorate --color --all";
-        hist  = "log --follow -p --";
-        p     = "pull";
-        s     = "status";
+        b      = "branch --color -v";
+        c      = "checkout";
+        cb     = "checkout -b";
+        cm     = "checkout master";
+        cp     = "cherry-pick";
+        d      = "diff";
+        difft  = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
+        fixup  = "commit --amend --no-edit";
+        l      = "log"
+               + " --graph"
+               + " --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset"
+               + " %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+               + " --abbrev-commit --date=relative";
+        lol    = "log --graph --oneline --decorate --color --all";
+        hist   = "log --follow -p --";
+        p      = "pull";
+        s      = "status";
         sign-after = "rebase -i --exec 'git commit --amend --no-edit --no-verify -S'";
-        sub   = "submodule";
-        subu  = "submodule update --init --recursive";
-        undo  = "reset --soft HEAD^";
-        w     = "worktree";
-        wa    = "worktree add"; # ../directory branch
-        wl    = "worktree list";
-        wrc   = "worktree remove .";
+        staash = "stash --all";
+        sub    = "submodule";
+        ou     = "submodule update --init --recursive";
+        undo   = "reset --soft HEAD^";
+        w      = "worktree";
+        wa     = "worktree add"; # ../directory branch
+        wl     = "worktree list";
+        wrc    = "worktree remove .";
       };
       init.defaultBranch = "main";
       core = {
