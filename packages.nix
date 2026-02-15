@@ -6,14 +6,12 @@ let
     alacritty
     git
     gnupg
-    libreoffice
     p7zip
     starship
     tmux
     xclip
     zoxide
     zstd
-    zuki-themes
   ];
 
   fonts = with nerd-fonts; [
@@ -35,7 +33,6 @@ let
   devTools = [
     act
     difftastic
-    hyperfine
     ripgrep
     tokei # Count your code, quickly
 
@@ -54,27 +51,23 @@ let
     jq
     jqp
     meld
-    newman
+
+    nosql-workbench
   ];
 
   perfTools = [
+    hyperfine
     iperf
   ];
 
   graphics = [
     darktable
     exiftool
-    gimp
-    gthumb
     inkscape
   ];
 
   internet = [
-    brave
     dig
-    dogdns
-    dropbox
-    google-chrome
     iftop
     ipcalc
     nmap
@@ -83,10 +76,14 @@ let
     rsync
   ];
 
+  browsers = [
+    brave
+    librewolf
+    google-chrome
+  ];
+
   media = [
     audacity
-    blanket
-    calibre
     spotify
   ];
 
@@ -96,7 +93,6 @@ let
     # gcc
     clang
     cmake
-    cmake-language-server
     gdb
     gnumake
 
@@ -105,7 +101,6 @@ let
     comma
     nh
     nix-output-monitor
-    nixd
     # nixpkgs-fmt # current official
     nvd
 
@@ -134,16 +129,11 @@ let
     # java + jvm
     gradle
     javaPackages.compiler.openjdk25
-    (jdt-language-server.override {
-      jdk = javaPackages.compiler.openjdk25;
-    })
     kotlin
-    kotlin-language-server
     spring-boot-cli
 
     # rust
     cargo
-    rust-analyzer
     rustc
     rustfmt
 
@@ -151,21 +141,22 @@ let
     go
     go-task
     gofumpt
-    gopls
     gotest # `go test' with colors
     gotools
     ko
 
+    protobuf
+    protoc-gen-go
+    protoc-gen-lint
+
     # javascript + typescript
     deno
     nodejs
-    nodePackages.typescript-language-server
 
     # lean version manager
     elan
 
     # others
-    nodePackages.bash-language-server
     shellcheck
     shfmt
     texliveFull
@@ -177,10 +168,7 @@ let
     btop
     dust
     entr # https://eradman.com/entrproject/
-    file-roller # archive manager
-    gnome-disk-utility
     htop
-    kdePackages.isoimagewriter
     procs
     pv
     yq
@@ -191,16 +179,39 @@ let
 
     cmatrix
     figlet
+    wthrr
   ];
 
+  linuxOnly = [
+    blanket
+    bpftrace
+    calibre
+    dropbox
+    file-roller # archive manager
+    gimp
+    gnome-disk-utility
+    gthumb
+    isoimagewriter
+    libreoffice
+    zuki-themes
+  ];
+
+  macOnly = [
+    colima
+    rectangle
+    iproute2mac
+  ];
 in
 
 basic
 ++ fonts
 ++ scripts
 ++ devTools
+++ perfTools
 ++ programming
 ++ graphics
 ++ internet
+++ browsers
 ++ media
 ++ misc
+++ (if pkgs.stdenv.hostPlatform.isDarwin then macOnly else linuxOnly)
