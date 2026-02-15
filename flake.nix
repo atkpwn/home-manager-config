@@ -50,7 +50,21 @@
     homeConfigurations = mkHomeConfigurationForAllHosts user {
       "bigfoot" = {
         system = "x86_64-linux";
-        extraModules = [ ./home.nix ];
+        extraModules = [
+          ./home.nix
+          ./modules/xfce
+          ./modules/rofi
+          ./modules/kubernetes
+        ];
+      };
+      "wuerfel" = {
+        # run hostname command; if the hostname isn't set then:
+        # sudo scutil --set HostName wuerfel
+        system = "aarch64-darwin";
+        extraModules = [
+          ./home.nix
+          ./modules/kubernetes
+        ];
       };
     };
   };

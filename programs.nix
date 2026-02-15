@@ -43,9 +43,6 @@ in {
       dl = "${home}/Downloads";
     };
     dotDir = "${config.xdg.configHome}/zsh";
-    envExtra = lib.optionalString isDarwin ''
-      [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
-    '';
     history = {
       extended       = true;
       ignoreAllDups  = true;
@@ -208,6 +205,7 @@ in {
   ghostty = {
     enable = true;
     enableZshIntegration = true;
+    package = if isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
     settings = {
       title = "Ghostty";
       theme = "Arthur";

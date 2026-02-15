@@ -3,20 +3,16 @@
 let
   inherit (pkgs) lib;
 in {
-  imports = [
-    ./modules/xfce
-    ./modules/rofi
-    ./modules/kubernetes
-  ];
 
   nixpkgs = {
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "dropbox"
-        "google-chrome"
-        "spotify"
         "firefox-bin"
         "firefox-bin-unwrapped"
+        "google-chrome"
+        "nosql-workbench"
+        "spotify"
       ];
     };
   };
@@ -41,7 +37,9 @@ in {
 
   home = {
     username = "attakorn";
-    homeDirectory = "/home/attakorn";
+    homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin
+    then "/Users/attakorn"
+    else "/home/attakorn";
     stateVersion = "25.11";
     keyboard = {
       layout = "us,th";
@@ -62,7 +60,7 @@ in {
     enable = true;
   };
 
-  services = {
+  services = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux) {
     gpg-agent = {
       enable = true;
       pinentry.package = pkgs.pinentry-all;
