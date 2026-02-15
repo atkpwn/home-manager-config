@@ -223,17 +223,6 @@ in {
     };
   };
 
-  broot = {
-    enable = true;
-    enableZshIntegration = true;
-    settings.verbs = [
-      { key = "ctrl-n"; execution = ":line_down"; }
-      { key = "ctrl-p"; execution = ":line_up"; }
-      { key = "ctrl-v"; execution = ":page_down"; }
-      { key = "alt-v"; execution = ":page_up"; }
-    ];
-  };
-
   delta = {
     enable = true;
     enableGitIntegration = true;
