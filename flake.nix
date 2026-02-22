@@ -39,6 +39,7 @@
             inherit inputs;
           };
           modules = [
+            ./home.nix
             inputs.nix-index-database.homeModules.nix-index
             inputs.emacs-with-env.homeModules.emacs-with-env
           ] ++ config.extraModules;
@@ -51,7 +52,6 @@
       "bigfoot" = {
         system = "x86_64-linux";
         extraModules = [
-          ./home.nix
           ./modules/xfce
           ./modules/rofi
           ./modules/kubernetes
@@ -62,8 +62,8 @@
         # sudo scutil --set HostName wuerfel
         system = "aarch64-darwin";
         extraModules = [
-          ./home.nix
           ./modules/kubernetes
+          ./modules/einkonbini
         ];
       };
     };

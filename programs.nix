@@ -300,10 +300,6 @@ in {
   git = {
     enable = true;
     settings = {
-      user  = {
-        name  = "Attakorn Putwattana";
-        email = "atkpwn@gmail.com";
-      };
       alias = {
         # some from https://github.com/nvie/git-toolbelt
         b      = "branch --color -v";
@@ -357,6 +353,9 @@ in {
       };
 
       "url \"git@github.com:\"".insteadOf = "https://github.com/";
+
+      "includeIf \"gitdir:~/\"".path =
+        "${config.xdg.configHome}/home-manager/config/git.config";
     };
   };
 
