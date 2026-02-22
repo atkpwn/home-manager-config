@@ -460,16 +460,8 @@ in {
           set -g @catppuccin_window_text "#{?#{!=:#{window_name},}, #W,}"
         '';
       };
-      tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin rec {
-        pluginName = "tokyo-night";
-        version = "1.5.5";
-        rtpFilePath = "tokyo-night.tmux";
-        src = pkgs.fetchFromGitHub {
-          owner = "janoamaral";
-          repo = "tokyo-night-tmux";
-          rev = "refs/tags/v${version}";
-          hash = "sha256-ATaSfJSg/Hhsd4LwoUgHkAApcWZV3O3kLOn61r1Vbag=";
-        };
+      tokyo-night = {
+        plugin = pkgs.tmuxPlugins.tokyo-night-tmux;
         extraConfig = ''
           set -g @tokyo-night-tmux_window_id_style none
           set -g @tokyo-night-tmux_pane_id_style hide
