@@ -13,6 +13,7 @@ in {
         "google-chrome"
         "nosql-workbench"
         "spotify"
+        "vscode"
       ];
     };
   };

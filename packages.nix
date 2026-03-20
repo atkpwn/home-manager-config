@@ -155,6 +155,13 @@ let
 
     # lean version manager
     elan
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        leanprover.lean4
+        tamasfe.even-better-toml
+        tuttieee.emacs-mcx
+      ];
+    })
 
     # others
     shellcheck
