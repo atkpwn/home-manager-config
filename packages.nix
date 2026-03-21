@@ -81,6 +81,7 @@ let
     # c/c++
     # ccls
     # gcc
+    clang
     cmakeCurses
     coreutils
     doxygen
