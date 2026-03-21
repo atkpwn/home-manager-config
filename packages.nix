@@ -187,6 +187,8 @@ let
     cmatrix
     figlet
     wthrr
+
+    helix
   ];
 
   linuxOnly = [
