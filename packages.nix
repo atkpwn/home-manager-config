@@ -93,7 +93,7 @@ let
     # gcc
     clang
     cmake
-    # gdb
+    lldb
     gnumake
 
     # nix
