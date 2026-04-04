@@ -394,6 +394,7 @@ in {
     enable = true;
     enableDefaultConfig = false;
     extraConfig = ''
+      Include ${home}/.colima/ssh_config
     '';
     matchBlocks = {
       bitbucket = {
