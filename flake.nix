@@ -22,13 +22,12 @@
   };
 
   outputs = { nixpkgs, home-manager, ... } @ inputs: let
-    user = "attakorn";
-    mkHomeConfigurationForAllHosts = user: hostConfigs: let
-      hosts = builtins.attrNames hostConfigs;
-      userHosts = map (host: "${user}@${host}") hosts;
+    mkHomeConfigurationForAllHosts = hostConfigs: let
+      userHosts = builtins.attrNames hostConfigs;
     in
       nixpkgs.lib.genAttrs userHosts (userHost: let
-        host = nixpkgs.lib.last (nixpkgs.lib.splitString "@" userHost);
+        username = builtins.head (nixpkgs.lib.splitString "@" userHost);
+        hostname = nixpkgs.lib.last (nixpkgs.lib.splitString "@" userHost);
         mkHome = config: home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit (config) system;
@@ -36,7 +35,11 @@
           };
           extraSpecialArgs = {
             useGlobalPkgs = true;
-            inherit inputs;
+            inherit
+              inputs
+              username
+              hostname
+            ;
           };
           modules = [
             ./home.nix
@@ -45,11 +48,11 @@
           ] ++ config.extraModules;
         };
       in
-        mkHome (builtins.getAttr host hostConfigs)
+        mkHome (builtins.getAttr userHost hostConfigs)
       );
   in {
-    homeConfigurations = mkHomeConfigurationForAllHosts user {
-      "bigfoot" = {
+    homeConfigurations = mkHomeConfigurationForAllHosts {
+      "attakorn@bigfoot" = {
         system = "x86_64-linux";
         extraModules = [
           ./modules/xfce
@@ -57,7 +60,7 @@
           ./modules/kubernetes
         ];
       };
-      "wuerfel" = {
+      "attakorn@wuerfel" = {
         # run hostname command; if the hostname isn't set then:
         # sudo scutil --set HostName wuerfel
         system = "aarch64-darwin";
