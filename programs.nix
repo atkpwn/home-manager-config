@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ hostname, config, pkgs, ... }:
 
 let
   inherit (pkgs) lib;
@@ -400,12 +400,12 @@ in {
       bitbucket = {
         host           = "bitbucket.org";
         identitiesOnly = true;
-        identityFile   = "${home}/.ssh/bigfoot";
+        identityFile   = "${home}/.ssh/${hostname}";
       };
       github = {
         host           = "github.com";
         identitiesOnly = true;
-        identityFile   = "${home}/.ssh/bigfoot";
+        identityFile   = "${home}/.ssh/${hostname}";
       };
       "*" = {
         addKeysToAgent = "no";

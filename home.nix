@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ username, hostname, config, pkgs, inputs, ... }:
 
 let
   inherit (pkgs) lib;
@@ -36,10 +36,10 @@ in {
   };
 
   home = {
-    username = "attakorn";
+    username = username;
     homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin
-    then "/Users/attakorn"
-    else "/home/attakorn";
+    then "/Users/${username}"
+    else "/home/${username}";
     stateVersion = "25.11";
     keyboard = {
       layout = "us,th";
@@ -53,7 +53,7 @@ in {
   };
 
   programs = import ./programs.nix {
-    inherit config pkgs;
+    inherit hostname config pkgs;
   };
 
   fonts.fontconfig = {
