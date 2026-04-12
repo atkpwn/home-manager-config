@@ -134,6 +134,7 @@ let
 
     # rust
     cargo
+    rust-analyzer
     rustc
     rustfmt
 
@@ -148,6 +149,8 @@ let
     protobuf
     protoc-gen-go
     protoc-gen-lint
+
+    sqlc
 
     # javascript + typescript
     deno
