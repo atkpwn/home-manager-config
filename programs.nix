@@ -20,7 +20,7 @@ in {
       "ignoredups"
       "ignorespace"
     ];
-    historyFile = ".config/bash_history";
+    historyFile = "${config.xdg.configHome}/bash_history";
     historyFileSize = 500000;
     historyIgnore = [
       "exit"
