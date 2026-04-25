@@ -127,16 +127,14 @@ let
     ]))
 
     # java + jvm
-    gradle
+    (gradle.override {
+      java = javaPackages.compiler.openjdk25;
+    })
     javaPackages.compiler.openjdk25
     kotlin
-    spring-boot-cli
 
     # rust
-    cargo
-    rust-analyzer
-    rustc
-    rustfmt
+    rustup
 
     # go
     go
