@@ -50,6 +50,7 @@ in {
     packages = import ./packages.nix { inherit pkgs; };
     sessionPath = [
       (toString ./bin)
+      "$HOME/.cargo/bin"
     ];
   };
 
