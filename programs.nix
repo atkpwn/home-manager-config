@@ -96,9 +96,6 @@ in {
         # switch group using `<` and `>`
         zstyle ':fzf-tab:*' switch-group '<' '>'
 
-        [ -f "${home}/.ghcup/env" ] && source "$HOME/.ghcup/env"
-        [ -f "${home}/.cargo/env" ] && source "$HOME/.cargo/env"
-
         function m() {
           emacsclient -ne "(man \"$1\")";
         }
@@ -115,12 +112,6 @@ in {
       zshConfigEarlyInit
       zshConfig
     ];
-    profileExtra = lib.optionalString isDarwin ''
-      if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
-        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        export NIX_PATH="${home}/.nix-defexpr"
-      fi
-    '';
     shellAliases = {
       ".."      = "cd ..";
       "..."     = "cd .. && cd ..";
@@ -147,7 +138,6 @@ in {
       tree = "${pkgs.eza}/bin/eza --tree";
     } // lib.optionalAttrs isDarwin {
       emacs = ''open "${home}/Applications/Home Manager Apps/Emacs.app"'';
-      google-chrome = ''open "/Applications/Google Chrome.app"'';
     };
   };
 
@@ -381,7 +371,7 @@ in {
       add_newline     = isDarwin;
       command_timeout = 2000;
       aws.format      = ''[($symbol$profile )(\[$duration\] )]($style)'';
-      right_format = "$time";
+      right_format    = "$time";
       time = {
         disabled = false;
         format   = "[$time]($style)";
