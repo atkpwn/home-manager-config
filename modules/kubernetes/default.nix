@@ -5,7 +5,7 @@
 
     argo-rollouts
     k9s
-    kubernetes-helm
+    # kubernetes-helm
     kustomize
     minikube
     skaffold

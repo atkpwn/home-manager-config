@@ -386,33 +386,29 @@ in {
     extraConfig = ''
       Include ${home}/.colima/ssh_config
     '';
-    matchBlocks = {
-      bitbucket = {
-        host           = "bitbucket.org";
-        identitiesOnly = true;
-        identityFile   = "${home}/.ssh/${hostname}";
+    settings = {
+      "bitbucket.org" = {
+        IdentitiesOnly = true;
+        IdentityFile   = "${home}/.ssh/${hostname}";
       };
-      github = {
-        host           = "github.com";
-        identitiesOnly = true;
-        identityFile   = "${home}/.ssh/${hostname}";
+      "github.com" = {
+        IdentitiesOnly = true;
+        IdentityFile   = "${home}/.ssh/${hostname}";
       };
       "*" = {
-        addKeysToAgent = "no";
-        compression = false;
-        controlMaster = "no";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
-        forwardAgent   = false;
+        AddKeysToAgent = "yes";
+        Compression = false;
+        ControlMaster = "no";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "no";
+        ForwardAgent   = false;
         # hashKnownHosts = true;
-        serverAliveCountMax = 3;
-        serverAliveInterval = 60;
-        userKnownHostsFile  = "${home}/.ssh/known_hosts";
-        extraOptions = {
-          ConnectTimeout = "5";
-          IgnoreUnknown  = "UseKeychain";
-          UseKeychain    = "yes";
-        };
+        ServerAliveCountMax = 3;
+        ServerAliveInterval = 60;
+        UserKnownHostsFile  = "${home}/.ssh/known_hosts";
+        ConnectTimeout = "5";
+        IgnoreUnknown  = "UseKeychain";
+        UseKeychain    = "yes";
       };
     };
   };
