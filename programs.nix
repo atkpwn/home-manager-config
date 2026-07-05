@@ -298,7 +298,7 @@ in {
         cm     = "checkout master";
         cp     = "cherry-pick";
         d      = "diff";
-        difft  = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
+        dt     = "difftool --extcmd=${pkgs.difftastic}/bin/difft";
         fixup  = "commit --amend --no-edit";
         l      = "log"
                + " --graph"
@@ -315,8 +315,9 @@ in {
         ou     = "submodule update --init --recursive";
         undo   = "reset --soft HEAD^";
         w      = "worktree";
-        wa     = "worktree add"; # ../directory branch
+        wa     = ''!f() { git worktree add ../"$(basename "$(git rev-parse --show-toplevel)")-$1" -b $1; }; f'';
         wl     = "worktree list";
+        wr     = "worktree remove";
         wrc    = "worktree remove .";
       };
       init.defaultBranch = "main";
