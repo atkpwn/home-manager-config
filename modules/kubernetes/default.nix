@@ -1,19 +1,22 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    kubectl
+{ config, pkgs, ... }: {
+  home = {
+    file = pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+      ".docker/run/docker.sock".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.colima/docker.sock";
+    };
 
-    argo-rollouts
-    k9s
-    # kubernetes-helm
-    kustomize
-    minikube
-    skaffold
-    stern
-  ] ++ (if pkgs.stdenv.hostPlatform.isDarwin
-  then [
-    colima
-  ]
-  else []
-  );
+    packages = with pkgs; [
+      kubectl
+
+      argo-rollouts
+      k9s
+      kustomize
+      minikube
+      skaffold
+      stern
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      colima
+    ];
+  };
 }
