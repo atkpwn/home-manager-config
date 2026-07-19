@@ -101,7 +101,7 @@ in {
         }
 
         function magit() {
-          PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
+          local PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
           emacsclient -ne "(progn
             (persp-switch \"''${1:-$(basename $PROJECT)}\")
             (find-file \"$PROJECT\")
@@ -127,6 +127,7 @@ in {
       p         = "cd $(git rev-parse --show-toplevel)";
       grep      = "grep --color=auto";
       k         = "${pkgs.kubectl}/bin/kubectl";
+      r         = "cd $(git rev-parse --show-toplevel)";
       dired = ''
         (
           DIR=''${''${PWD##*/}:-/}
@@ -314,6 +315,7 @@ in {
         sub    = "submodule";
         ou     = "submodule update --init --recursive";
         undo   = "reset --soft HEAD^";
+        update = "!git fetch origin && git rebase origin/main";
         w      = "worktree";
         wa     = ''!f() { git worktree add ../"$(basename "$(git rev-parse --show-toplevel)")-$1" -b $1; }; f'';
         wl     = "worktree list";

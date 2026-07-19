@@ -28,7 +28,11 @@ in {
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
 
     package = pkgs.nix; # required for generating nix.conf
-    settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
+    settings.experimental-features = [
+      "flakes"
+      "nix-command"
+      "pipe-operators"
+    ];
 
     gc = {
       automatic = true;
@@ -63,7 +67,7 @@ in {
     enable = true;
   };
 
-  services = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux) {
+  services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     gpg-agent = {
       enable = true;
       pinentry.package = pkgs.pinentry-all;
