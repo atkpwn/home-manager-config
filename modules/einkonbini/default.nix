@@ -3,6 +3,7 @@
 let
   inherit (pkgs) lib;
   home = config.home.homeDirectory;
+  moduleHome = "${config.xdg.configHome}/home-manager/modules/einkonbini";
 in {
   programs = {
     zsh.dirHashes = {
@@ -12,13 +13,13 @@ in {
     git = {
       settings = {
         "includeIf \"gitdir:~/projects/einkonbini/\"".path =
-          "${config.xdg.configHome}/home-manager/modules/einkonbini/git.config";
+          "${moduleHome}/git.config";
       };
     };
 
     ssh = {
       extraConfig = lib.mkOrder 1200 ''
-        Include ${config.xdg.configHome}/home-manager/modules/einkonbini/ssh.config
+        Include ${moduleHome}/ssh.config
       '';
     };
   };
