@@ -12,6 +12,7 @@ in {
         "firefox-bin-unwrapped"
         "google-chrome"
         "nosql-workbench"
+        "obsidian"
         "spotify"
         "vscode"
       ];

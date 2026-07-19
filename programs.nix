@@ -248,7 +248,7 @@ in {
       "--border"
       "--color 'header:italic:underline,label:blue'"
     ];
-    fileWidgetOptions = [
+    fileWidget.options = [
       "--preview '${pkgs.bat}/bin/bat -n --color=always {}'"
       "--preview-window 'hidden'"
       "--bind 'ctrl-/:toggle-preview'"

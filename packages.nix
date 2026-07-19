@@ -23,6 +23,12 @@ let
     symbols-only
   ];
 
+  browsers = [
+    brave
+    librewolf
+    google-chrome
+  ];
+
   scripts = let
     fs = pkgs.lib.fileset;
     in
@@ -33,6 +39,7 @@ let
   devTools = [
     act
     difftastic
+    hunk
     ripgrep
     tokei # Count your code, quickly
 
@@ -52,21 +59,15 @@ let
     jqp
     meld
 
-    nosql-workbench
-  ];
-
-  perfTools = [
     hyperfine
     iperf
+
+    herdr
+    opencode
+    pi-coding-agent
   ];
 
-  graphics = [
-    darktable
-    exiftool
-    inkscape
-  ];
-
-  internet = [
+  network = [
     dig
     iftop
     ipcalc
@@ -76,25 +77,17 @@ let
     rsync
   ];
 
-  browsers = [
-    brave
-    librewolf
-    google-chrome
-  ];
-
-  media = [
-    audacity
-    spotify
-  ];
-
   programming = [
     # c/c++
-    ccls
+    # ccls
     # gcc
-    clang
-    cmake
-    # gdb
+    cmakeCurses
+    coreutils
+    doxygen
+    gdb
     gnumake
+    lldb
+    pkg-config
 
     # nix
     alejandra
@@ -106,9 +99,8 @@ let
 
     # python
     ruff # linter & formatter
-
     uv
-    (python313.withPackages (ps: with ps; [
+    (python314.withPackages (ps: with ps; [
       matplotlib
       numpy
       pandas
@@ -119,11 +111,6 @@ let
       loguru
       pytest
       rich
-
-      mypy # type checker
-      pylsp-mypy
-      python-lsp-ruff
-      python-lsp-server
     ]))
 
     # java + jvm
@@ -141,7 +128,6 @@ let
     go-task
     gofumpt
     gotest # `go test' with colors
-    gotools
     ko
 
     protobuf
@@ -170,6 +156,17 @@ let
     texliveFull
   ];
 
+  graphics = [
+    darktable
+    exiftool
+    inkscape
+  ];
+
+  media = [
+    # audacity
+    spotify
+  ];
+
   misc = [
     bat
     bottom
@@ -190,6 +187,8 @@ let
     wthrr
 
     helix
+
+    obsidian
   ];
 
   linuxOnly = [
@@ -215,13 +214,12 @@ in
 
 basic
 ++ fonts
+++ browsers
 ++ scripts
 ++ devTools
-++ perfTools
+++ network
 ++ programming
 ++ graphics
-++ internet
-++ browsers
 ++ media
 ++ misc
 ++ (if pkgs.stdenv.hostPlatform.isDarwin then macOnly else linuxOnly)

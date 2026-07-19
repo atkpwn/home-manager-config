@@ -6,7 +6,7 @@
     };
 
     packages = with pkgs; [
-      kubectl
+      # kubectl # use from minikube
 
       argo-rollouts
       k9s
