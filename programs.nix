@@ -96,17 +96,6 @@ in {
         # switch group using `<` and `>`
         zstyle ':fzf-tab:*' switch-group '<' '>'
 
-        function m() {
-          emacsclient -ne "(man \"$1\")";
-        }
-
-        function magit() {
-          local PROJECT=$(git rev-parse --show-toplevel 2> /dev/null)
-          emacsclient -ne "(progn
-            (persp-switch \"''${1:-$(basename $PROJECT)}\")
-            (find-file \"$PROJECT\")
-            (magit-status))"
-        }
       '';
     in lib.mkMerge [
       zshConfigEarlyInit
@@ -116,7 +105,6 @@ in {
       ".."      = "cd ..";
       "..."     = "cd .. && cd ..";
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
-      e         = "emacsclient";
       g         = "git";
       gm        = "git checkout main";
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
@@ -128,17 +116,7 @@ in {
       grep      = "grep --color=auto";
       k         = "${pkgs.kubectl}/bin/kubectl";
       r         = "cd $(git rev-parse --show-toplevel)";
-      dired = ''
-        (
-          DIR=''${''${PWD##*/}:-/}
-          emacsclient -ne "(progn
-            (persp-switch \"$DIR\")
-            (find-file \"$PWD\"))"
-        )
-      '';
-      tree = "${pkgs.eza}/bin/eza --tree";
-    } // lib.optionalAttrs isDarwin {
-      emacs = ''open "${home}/Applications/Home Manager Apps/Emacs.app"'';
+      tree      = "${pkgs.eza}/bin/eza --tree";
     };
   };
 
