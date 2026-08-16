@@ -112,12 +112,14 @@ in {
       "..."     = "cd .. && cd ..";
       clipboard = (if isDarwin then "pbcopy" else "xclip -sel clip");
       g         = "git";
-      gm        = "git checkout main";
+      gd        = "git diff";
       gdifft    = "GIT_EXTERNAL_DIFF=${pkgs.difftastic}/bin/difft git diff";
       gl        = "git l -10";
       gls       = "git ls-files | xargs wc -l";
+      gm        = "git checkout main";
       gmp       = "git checkout main && git pull";
       gp        = "git pull";
+      gs        = "git status";
       p         = "cd $(git rev-parse --show-toplevel)";
       grep      = "grep --color=auto";
       k         = "${pkgs.kubectl}/bin/kubectl";
