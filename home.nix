@@ -57,6 +57,10 @@ in {
       (toString ./bin)
       "$HOME/.cargo/bin"
     ];
+    file = {
+      "${config.xdg.configHome}/herdr/config.toml".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/home-manager/config/herdr-config.toml";
+    };
   };
 
   programs = import ./programs.nix {

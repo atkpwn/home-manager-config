@@ -1,0 +1,26 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+z"
+workspace_picker = "prefix+w"
+goto = "prefix+g" #
+detach = "prefix+ctrl+c"
+new_tab = "prefix+c"
+rename_tab = "prefix+,"
+close_tab = "prefix+ampersand"
+copy_mode = "prefix+y"
+cycle_pane_next = "prefix+o"
+last_pane = "prefix+ctrl+;"
+split_vertical = "prefix+percent"
+split_horizontal = "prefix+double_quote"
+toggle_sidebar = "meta+`"
+
+[ui]
+prompt_new_tab_name = false
+prompt_new_workspace_name = true
+pane_borders = false
+pane_gaps = false
+
+[theme]
+name = "catppuccin"
+auto_switch = false
