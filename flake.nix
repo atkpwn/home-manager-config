@@ -67,6 +67,7 @@
         extraModules = [
           ./modules/kubernetes
           ./modules/einkonbini
+          ./modules/pi
         ];
       };
     };
