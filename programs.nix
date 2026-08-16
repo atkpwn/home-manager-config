@@ -96,6 +96,12 @@ in {
         # switch group using `<` and `>`
         zstyle ':fzf-tab:*' switch-group '<' '>'
 
+        # https://unix.stackexchange.com/a/34251
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey "^X^E" edit-command-line
+
+        alias -s json=bat
       '';
     in lib.mkMerge [
       zshConfigEarlyInit
