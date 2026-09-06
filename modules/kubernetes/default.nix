@@ -10,6 +10,9 @@
 
       argo-rollouts
       k9s
+      (wrapHelm kubernetes-helm { plugins = with kubernetes-helmPlugins; [
+        helm-diff
+      ]; })
       kustomize
       minikube
       skaffold
@@ -18,5 +21,12 @@
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       colima
     ];
+  };
+
+  programs = {
+    k9s = {
+      enable = true;
+      plugins = import ./k9s-plugins.nix { inherit pkgs; };
+    };
   };
 }
