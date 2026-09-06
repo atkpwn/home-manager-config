@@ -15,6 +15,7 @@
       ]; })
       kustomize
       minikube
+      opentofu
       skaffold
       stern
     ]
