@@ -2,13 +2,13 @@ onboarding = false
 
 [keys]
 prefix = "ctrl+z"
+new_workspace = "prefix+shift+c"
 workspace_picker = "prefix+w"
-goto = "prefix+g" #
+goto = "prefix+g"
 detach = "prefix+ctrl+c"
 new_tab = "prefix+c"
 rename_tab = "prefix+,"
 close_tab = "prefix+ampersand"
-copy_mode = "prefix+y"
 cycle_pane_next = "prefix+o"
 last_pane = "prefix+ctrl+;"
 split_vertical = "prefix+percent"
@@ -18,9 +18,9 @@ toggle_sidebar = "meta+`"
 [ui]
 prompt_new_tab_name = false
 prompt_new_workspace_name = true
-pane_borders = false
+pane_borders = true
 pane_gaps = false
 
 [theme]
-name = "catppuccin"
+name = "nord"
 auto_switch = false

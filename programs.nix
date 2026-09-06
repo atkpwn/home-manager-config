@@ -66,6 +66,7 @@ in {
         fpath=(${pkgs.deno}/share/zsh/site-functions $fpath)
         fpath=(${pkgs.gradle-completion}/share/zsh/site-functions $fpath)
         fpath=(${pkgs.pass}/share/zsh/site-functions $fpath)
+        fpath=(${pkgs.herdr}/share/zsh/site-functions $fpath)
       '';
       zshConfig = lib.mkOrder 1000 ''
         export LS_COLORS="$(${pkgs.vivid}/bin/vivid generate alabaster_dark)"
